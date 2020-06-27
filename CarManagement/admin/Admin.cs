@@ -96,6 +96,7 @@ namespace CarManagement.admin
                         fi.CopyTo(path);
                         filePath = "";
                         loadData();
+                        refress();
                     }
                     else
                     {
@@ -118,6 +119,12 @@ namespace CarManagement.admin
             if(!Check.getString(txtCarID.Text))
             {
                 MessageBox.Show("CarID Field is empty !", "Error");
+                txtCarID.Focus();
+                return false;
+            }
+            if (!dao.checkIDDulicate(txtCarID.Text))
+            {
+                MessageBox.Show("CarID is duplicate !", "Error");
                 txtCarID.Focus();
                 return false;
             }
@@ -239,6 +246,60 @@ namespace CarManagement.admin
                 showImage(imageName);
             }
             catch (Exception)
+            {
+                return;
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            bool check = checkField();
+            if (check)
+            {
+                string appPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+                string fileName = Path.GetFileNameWithoutExtension(txtImage.Text);
+                string extension = Path.GetExtension(txtImage.Text);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                CarDTO dto = new CarDTO()
+                {
+                    carID = txtCarID.Text,
+                    name = txtName.Text,
+                    type = txtType.Text,
+                    brand = txtBrand.Text,
+                    model = txtModel.Text,
+                    origin = txtOrigin.Text,
+                    color = txtColor.Text,
+                    price = float.Parse(txtPrice.Text),
+                    status = cbStatus.Checked,
+                    imageName = fileName
+                };
+                try
+                {
+                    if (dao.insertNewCar(dto))
+                    {
+                        MessageBox.Show("Successfully insert car with an ID of" + dto.carID, "Message");
+                        string path = Path.Combine(appPath + "\\images\\" + dto.imageName);
+                        FileInfo fi = new FileInfo(filePath);
+                        fi.CopyTo(path);
+                        filePath = "";
+                        loadData();
+                    }
+                    else
+                    {
+                        MessageBox.Show("UnSuccessfully insert car", "Message");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+            else
             {
                 return;
             }

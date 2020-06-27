@@ -33,11 +33,12 @@
             this.tcAdmin = new System.Windows.Forms.TabControl();
             this.tpEmployee = new System.Windows.Forms.TabPage();
             this.tbCar = new System.Windows.Forms.TabPage();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnChooseImage = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.txtImage = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.cbStatus = new System.Windows.Forms.CheckBox();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -70,7 +71,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.openFile = new System.Windows.Forms.OpenFileDialog();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.tcAdmin.SuspendLayout();
             this.tbCar.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -93,7 +93,7 @@
             // btnLogout
             // 
             this.btnLogout.Location = new System.Drawing.Point(535, 25);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(4);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(157, 39);
             this.btnLogout.TabIndex = 3;
@@ -108,7 +108,7 @@
             this.tcAdmin.Controls.Add(this.tbCustomer);
             this.tcAdmin.Controls.Add(this.tpInvoice);
             this.tcAdmin.Location = new System.Drawing.Point(45, 87);
-            this.tcAdmin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tcAdmin.Margin = new System.Windows.Forms.Padding(4);
             this.tcAdmin.Name = "tcAdmin";
             this.tcAdmin.SelectedIndex = 0;
             this.tcAdmin.Size = new System.Drawing.Size(1509, 657);
@@ -117,9 +117,9 @@
             // tpEmployee
             // 
             this.tpEmployee.Location = new System.Drawing.Point(4, 25);
-            this.tpEmployee.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpEmployee.Margin = new System.Windows.Forms.Padding(4);
             this.tpEmployee.Name = "tpEmployee";
-            this.tpEmployee.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpEmployee.Padding = new System.Windows.Forms.Padding(4);
             this.tpEmployee.Size = new System.Drawing.Size(1501, 628);
             this.tpEmployee.TabIndex = 0;
             this.tpEmployee.Text = "Employee";
@@ -135,18 +135,28 @@
             this.tbCar.Controls.Add(this.label1);
             this.tbCar.Controls.Add(this.dgvCar);
             this.tbCar.Location = new System.Drawing.Point(4, 25);
-            this.tbCar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbCar.Margin = new System.Windows.Forms.Padding(4);
             this.tbCar.Name = "tbCar";
-            this.tbCar.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbCar.Padding = new System.Windows.Forms.Padding(4);
             this.tbCar.Size = new System.Drawing.Size(1501, 628);
             this.tbCar.TabIndex = 1;
             this.tbCar.Text = "Car";
             this.tbCar.UseVisualStyleBackColor = true;
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(1096, 175);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(183, 47);
+            this.btnRefresh.TabIndex = 15;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.btnChooseImage);
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.btnUpdate);
             this.panel2.Controls.Add(this.btnDelete);
             this.panel2.Controls.Add(this.txtImage);
             this.panel2.Controls.Add(this.label13);
@@ -186,15 +196,27 @@
             this.btnChooseImage.UseVisualStyleBackColor = true;
             this.btnChooseImage.Click += new System.EventHandler(this.btnChooseImage_Click);
             // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(1064, 77);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(187, 53);
+            this.btnUpdate.TabIndex = 6;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // btnDelete
             // 
             this.btnDelete.Location = new System.Drawing.Point(1263, 77);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(187, 52);
             this.btnDelete.TabIndex = 7;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // txtImage
             // 
@@ -205,16 +227,6 @@
             this.txtImage.Name = "txtImage";
             this.txtImage.Size = new System.Drawing.Size(169, 22);
             this.txtImage.TabIndex = 25;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(1064, 77);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(187, 53);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Update";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // label13
             // 
@@ -239,7 +251,7 @@
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(1263, 12);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(187, 48);
             this.btnAdd.TabIndex = 4;
@@ -395,7 +407,7 @@
             // btnDeatail
             // 
             this.btnDeatail.Location = new System.Drawing.Point(1308, 175);
-            this.btnDeatail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDeatail.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeatail.Name = "btnDeatail";
             this.btnDeatail.Size = new System.Drawing.Size(171, 48);
             this.btnDeatail.TabIndex = 5;
@@ -405,7 +417,7 @@
             // pictureBoxCar
             // 
             this.pictureBoxCar.Location = new System.Drawing.Point(1096, 239);
-            this.pictureBoxCar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBoxCar.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxCar.Name = "pictureBoxCar";
             this.pictureBoxCar.Size = new System.Drawing.Size(383, 366);
             this.pictureBoxCar.TabIndex = 3;
@@ -414,7 +426,7 @@
             // txtSearchCar
             // 
             this.txtSearchCar.Location = new System.Drawing.Point(100, 188);
-            this.txtSearchCar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSearchCar.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearchCar.Name = "txtSearchCar";
             this.txtSearchCar.Size = new System.Drawing.Size(543, 22);
             this.txtSearchCar.TabIndex = 2;
@@ -433,7 +445,7 @@
             // 
             this.dgvCar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCar.Location = new System.Drawing.Point(23, 239);
-            this.dgvCar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvCar.Margin = new System.Windows.Forms.Padding(4);
             this.dgvCar.Name = "dgvCar";
             this.dgvCar.ReadOnly = true;
             this.dgvCar.RowHeadersWidth = 51;
@@ -444,9 +456,9 @@
             // tbCustomer
             // 
             this.tbCustomer.Location = new System.Drawing.Point(4, 25);
-            this.tbCustomer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.tbCustomer.Name = "tbCustomer";
-            this.tbCustomer.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbCustomer.Padding = new System.Windows.Forms.Padding(4);
             this.tbCustomer.Size = new System.Drawing.Size(1501, 628);
             this.tbCustomer.TabIndex = 2;
             this.tbCustomer.Text = "Customer";
@@ -455,9 +467,9 @@
             // tpInvoice
             // 
             this.tpInvoice.Location = new System.Drawing.Point(4, 25);
-            this.tpInvoice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpInvoice.Margin = new System.Windows.Forms.Padding(4);
             this.tpInvoice.Name = "tpInvoice";
-            this.tpInvoice.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpInvoice.Padding = new System.Windows.Forms.Padding(4);
             this.tpInvoice.Size = new System.Drawing.Size(1501, 628);
             this.tpInvoice.TabIndex = 3;
             this.tpInvoice.Text = "Manage Invoice";
@@ -471,7 +483,7 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.lbID);
             this.panel1.Location = new System.Drawing.Point(49, 14);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(447, 52);
             this.panel1.TabIndex = 5;
@@ -509,16 +521,6 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "ID: ";
             // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Location = new System.Drawing.Point(1096, 175);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(183, 47);
-            this.btnRefresh.TabIndex = 15;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -527,7 +529,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tcAdmin);
             this.Controls.Add(this.btnLogout);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Admin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Admin";
@@ -562,7 +564,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDeatail;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.CheckBox cbStatus;
