@@ -70,6 +70,7 @@
             // 
             // button2
             // 
+            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button2.Font = new System.Drawing.Font("Cooper Black", 20.25F);
             this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.button2.Location = new System.Drawing.Point(365, 532);
@@ -148,7 +149,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::CarManagement.Properties.Resources.Capture111;
             this.CancelButton = this.button2;
-            this.ClientSize = new System.Drawing.Size(1525, 881);
+            this.ClientSize = new System.Drawing.Size(1428, 881);
             this.Controls.Add(this.mainPanel);
             this.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Margin = new System.Windows.Forms.Padding(4);
