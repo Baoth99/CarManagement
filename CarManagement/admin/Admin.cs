@@ -2,6 +2,7 @@
 using Data.dtos;
 using Microsoft.Win32.SafeHandles;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,7 +23,7 @@ namespace CarManagement.admin
     {
         public delegate void LoginSuccessfull(EmployeeDTO dto);
         public LoginSuccessfull data;
-        CarDAO dao = new CarDAO();
+        readonly CarDAO dao = new CarDAO();
         DataTable dtCar;
         string filePath = "";
         public Admin()
@@ -30,7 +31,6 @@ namespace CarManagement.admin
             InitializeComponent();
             data = new LoginSuccessfull(ReceiveData);
             loadData();
-
         }
 
         public void Login()
@@ -52,10 +52,6 @@ namespace CarManagement.admin
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
@@ -218,6 +214,7 @@ namespace CarManagement.admin
         }
         private void refress()
         {
+            txtCarID.Enabled = true;
             txtCarID.Text = "";
             txtName.Text = "";
             txtType.Text = "";
@@ -236,18 +233,58 @@ namespace CarManagement.admin
             refress();
         }
 
+        private void databindings_clear()
+        {
+            txtCarID.DataBindings.Clear();
+            txtName.DataBindings.Clear();
+            txtType.DataBindings.Clear();
+            txtBrand.DataBindings.Clear();
+            txtModel.DataBindings.Clear();
+            txtOrigin.DataBindings.Clear();
+            txtColor.DataBindings.Clear();
+            txtPrice.DataBindings.Clear();
+            cbStatus.DataBindings.Clear();
+            txtImage.DataBindings.Clear();
+        }
+
+        private void showTextBox()
+        {
+            txtCarID.Enabled = false;
+            txtCarID.DataBindings.Add("Text", dtCar, "CarID");
+            txtName.DataBindings.Add("Text", dtCar, "Name");
+            txtType.DataBindings.Add("Text", dtCar, "Type");
+            txtBrand.DataBindings.Add("Text", dtCar, "Brand");
+            txtModel.DataBindings.Add("Text", dtCar, "Model");
+            txtOrigin.DataBindings.Add("Text", dtCar, "Origin");
+            txtColor.DataBindings.Add("Text", dtCar, "Color");
+            txtPrice.DataBindings.Add("Text", dtCar, "Price");
+            cbStatus.DataBindings.Add("Checked", dtCar, "Status");
+            txtImage.DataBindings.Add("Text", dtCar, "ImagesName");
+        }
         private void dgvCar_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-                pictureBoxCar.DataBindings.Clear();
-                int numRow = e.RowIndex;
-                string imageName = dgvCar.Rows[numRow].Cells[9].Value.ToString();
+
+                /* pictureBoxCar.DataBindings.Clear();
+                 int numRow = e.RowIndex;
+                 if (numRow < 0)
+                 {
+                     return;
+                 }
+                 else
+                 {
+                     string imageName = dgvCar.Rows[numRow].Cells[9].Value.ToString();
+                     showImage(imageName);
+                 }*/
+                databindings_clear();
+                showTextBox();
+                string imageName = txtImage.Text;
                 showImage(imageName);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return;
+                throw new Exception(ex.Message);
             }
         }
 

@@ -59,7 +59,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.btnDeatail = new System.Windows.Forms.Button();
+            this.btnDetail = new System.Windows.Forms.Button();
             this.pictureBoxCar = new System.Windows.Forms.PictureBox();
             this.txtSearchCar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -111,7 +111,7 @@
             this.tcAdmin.Margin = new System.Windows.Forms.Padding(4);
             this.tcAdmin.Name = "tcAdmin";
             this.tcAdmin.SelectedIndex = 0;
-            this.tcAdmin.Size = new System.Drawing.Size(1509, 657);
+            this.tcAdmin.Size = new System.Drawing.Size(1520, 657);
             this.tcAdmin.TabIndex = 4;
             // 
             // tpEmployee
@@ -129,7 +129,7 @@
             // 
             this.tbCar.Controls.Add(this.btnRefresh);
             this.tbCar.Controls.Add(this.panel2);
-            this.tbCar.Controls.Add(this.btnDeatail);
+            this.tbCar.Controls.Add(this.btnDetail);
             this.tbCar.Controls.Add(this.pictureBoxCar);
             this.tbCar.Controls.Add(this.txtSearchCar);
             this.tbCar.Controls.Add(this.label1);
@@ -138,7 +138,7 @@
             this.tbCar.Margin = new System.Windows.Forms.Padding(4);
             this.tbCar.Name = "tbCar";
             this.tbCar.Padding = new System.Windows.Forms.Padding(4);
-            this.tbCar.Size = new System.Drawing.Size(1501, 628);
+            this.tbCar.Size = new System.Drawing.Size(1512, 628);
             this.tbCar.TabIndex = 1;
             this.tbCar.Text = "Car";
             this.tbCar.UseVisualStyleBackColor = true;
@@ -404,15 +404,15 @@
             this.txtName.Size = new System.Drawing.Size(216, 22);
             this.txtName.TabIndex = 11;
             // 
-            // btnDeatail
+            // btnDetail
             // 
-            this.btnDeatail.Location = new System.Drawing.Point(1308, 175);
-            this.btnDeatail.Margin = new System.Windows.Forms.Padding(4);
-            this.btnDeatail.Name = "btnDeatail";
-            this.btnDeatail.Size = new System.Drawing.Size(171, 48);
-            this.btnDeatail.TabIndex = 5;
-            this.btnDeatail.Text = "Detail";
-            this.btnDeatail.UseVisualStyleBackColor = true;
+            this.btnDetail.Location = new System.Drawing.Point(1308, 175);
+            this.btnDetail.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDetail.Name = "btnDetail";
+            this.btnDetail.Size = new System.Drawing.Size(171, 48);
+            this.btnDetail.TabIndex = 5;
+            this.btnDetail.Text = "Detail";
+            this.btnDetail.UseVisualStyleBackColor = true;
             // 
             // pictureBoxCar
             // 
@@ -565,7 +565,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnDeatail;
+        private System.Windows.Forms.Button btnDetail;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.CheckBox cbStatus;
         private System.Windows.Forms.Label label12;
