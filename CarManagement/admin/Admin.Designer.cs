@@ -244,7 +244,6 @@
             this.btnAddCus.TabIndex = 8;
             this.btnAddCus.Text = "Add New Customer";
             this.btnAddCus.UseVisualStyleBackColor = true;
-            this.btnAddCus.Click += new System.EventHandler(this.btnAddCus_Click);
             // 
             // txtAddress
             // 

@@ -65,6 +65,7 @@ namespace CarManagement.admin
             this.Close();
         }
 
+        //Car
         private void btnAdd_Click(object sender, EventArgs e)
         {
             bool check = checkField();
@@ -321,18 +322,6 @@ namespace CarManagement.admin
         {
             try
             {
-
-                /* pictureBoxCar.DataBindings.Clear();
-                 int numRow = e.RowIndex;
-                 if (numRow < 0)
-                 {
-                     return;
-                 }
-                 else
-                 {
-                     string imageName = dgvCar.Rows[numRow].Cells[9].Value.ToString();
-                     showImage(imageName);
-                 }*/
                 databindings_clear();
                 showTextBox();
                 string imageName = txtImage.Text;
@@ -419,7 +408,7 @@ namespace CarManagement.admin
                 return;
             }
         }
-
+        //Customer
         private void btnAddCus_Click(object sender, EventArgs e)
         {
 
