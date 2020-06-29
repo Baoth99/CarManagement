@@ -31,6 +31,20 @@
             this.lbID = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
             this.tcAdmin = new System.Windows.Forms.TabControl();
+            this.tbCustomer = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.txtSearchCustomer = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.btnUpdateCus = new System.Windows.Forms.Button();
+            this.btnDeleteCus = new System.Windows.Forms.Button();
+            this.btnAddCus = new System.Windows.Forms.Button();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.lb100 = new System.Windows.Forms.Label();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.tpEmployee = new System.Windows.Forms.TabPage();
             this.tbCar = new System.Windows.Forms.TabPage();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -64,19 +78,25 @@
             this.txtSearchCar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvCar = new System.Windows.Forms.DataGridView();
-            this.tbCustomer = new System.Windows.Forms.TabPage();
             this.tpInvoice = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbName = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.openFile = new System.Windows.Forms.OpenFileDialog();
+            this.dgvCustomer = new System.Windows.Forms.DataGridView();
+            this.pictureBoxCustomer = new System.Windows.Forms.PictureBox();
+            this.txtCustomerName = new System.Windows.Forms.TextBox();
             this.tcAdmin.SuspendLayout();
+            this.tbCustomer.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.tbCar.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCar)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomer)).BeginInit();
             this.SuspendLayout();
             // 
             // lbID
@@ -96,23 +116,167 @@
             this.btnLogout.Margin = new System.Windows.Forms.Padding(4);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(157, 39);
-            this.btnLogout.TabIndex = 3;
+            this.btnLogout.TabIndex = 1;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // tcAdmin
             // 
+            this.tcAdmin.Controls.Add(this.tbCustomer);
             this.tcAdmin.Controls.Add(this.tpEmployee);
             this.tcAdmin.Controls.Add(this.tbCar);
-            this.tcAdmin.Controls.Add(this.tbCustomer);
             this.tcAdmin.Controls.Add(this.tpInvoice);
             this.tcAdmin.Location = new System.Drawing.Point(45, 87);
             this.tcAdmin.Margin = new System.Windows.Forms.Padding(4);
             this.tcAdmin.Name = "tcAdmin";
             this.tcAdmin.SelectedIndex = 0;
             this.tcAdmin.Size = new System.Drawing.Size(1520, 657);
-            this.tcAdmin.TabIndex = 4;
+            this.tcAdmin.TabIndex = 13;
+            // 
+            // tbCustomer
+            // 
+            this.tbCustomer.Controls.Add(this.pictureBoxCustomer);
+            this.tbCustomer.Controls.Add(this.dgvCustomer);
+            this.tbCustomer.Controls.Add(this.panel3);
+            this.tbCustomer.Location = new System.Drawing.Point(4, 25);
+            this.tbCustomer.Margin = new System.Windows.Forms.Padding(4);
+            this.tbCustomer.Name = "tbCustomer";
+            this.tbCustomer.Padding = new System.Windows.Forms.Padding(4);
+            this.tbCustomer.Size = new System.Drawing.Size(1512, 628);
+            this.tbCustomer.TabIndex = 2;
+            this.tbCustomer.Text = "Customer";
+            this.tbCustomer.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.txtCustomerName);
+            this.panel3.Controls.Add(this.txtSearchCustomer);
+            this.panel3.Controls.Add(this.label15);
+            this.panel3.Controls.Add(this.btnUpdateCus);
+            this.panel3.Controls.Add(this.btnDeleteCus);
+            this.panel3.Controls.Add(this.btnAddCus);
+            this.panel3.Controls.Add(this.txtAddress);
+            this.panel3.Controls.Add(this.label17);
+            this.panel3.Controls.Add(this.lb100);
+            this.panel3.Controls.Add(this.txtEmail);
+            this.panel3.Controls.Add(this.txtPhone);
+            this.panel3.Controls.Add(this.label22);
+            this.panel3.Controls.Add(this.label23);
+            this.panel3.Location = new System.Drawing.Point(29, 27);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1467, 146);
+            this.panel3.TabIndex = 15;
+            // 
+            // txtSearchCustomer
+            // 
+            this.txtSearchCustomer.Location = new System.Drawing.Point(268, 107);
+            this.txtSearchCustomer.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSearchCustomer.Name = "txtSearchCustomer";
+            this.txtSearchCustomer.Size = new System.Drawing.Size(543, 22);
+            this.txtSearchCustomer.TabIndex = 7;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(193, 110);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(57, 17);
+            this.label15.TabIndex = 27;
+            this.label15.Text = "Search:";
+            // 
+            // btnUpdateCus
+            // 
+            this.btnUpdateCus.Location = new System.Drawing.Point(1064, 77);
+            this.btnUpdateCus.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUpdateCus.Name = "btnUpdateCus";
+            this.btnUpdateCus.Size = new System.Drawing.Size(187, 53);
+            this.btnUpdateCus.TabIndex = 9;
+            this.btnUpdateCus.Text = "Update";
+            this.btnUpdateCus.UseVisualStyleBackColor = true;
+            // 
+            // btnDeleteCus
+            // 
+            this.btnDeleteCus.Location = new System.Drawing.Point(1263, 77);
+            this.btnDeleteCus.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDeleteCus.Name = "btnDeleteCus";
+            this.btnDeleteCus.Size = new System.Drawing.Size(187, 52);
+            this.btnDeleteCus.TabIndex = 10;
+            this.btnDeleteCus.Text = "Delete";
+            this.btnDeleteCus.UseVisualStyleBackColor = true;
+            // 
+            // btnAddCus
+            // 
+            this.btnAddCus.Location = new System.Drawing.Point(1064, 10);
+            this.btnAddCus.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAddCus.Name = "btnAddCus";
+            this.btnAddCus.Size = new System.Drawing.Size(187, 48);
+            this.btnAddCus.TabIndex = 8;
+            this.btnAddCus.Text = "Add New Customer";
+            this.btnAddCus.UseVisualStyleBackColor = true;
+            this.btnAddCus.Click += new System.EventHandler(this.btnAddCus_Click);
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(723, 6);
+            this.txtAddress.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(216, 22);
+            this.txtAddress.TabIndex = 5;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(664, 9);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(64, 17);
+            this.label17.TabIndex = 18;
+            this.label17.Text = "Address:";
+            // 
+            // lb100
+            // 
+            this.lb100.AutoSize = true;
+            this.lb100.Location = new System.Drawing.Point(13, 10);
+            this.lb100.Name = "lb100";
+            this.lb100.Size = new System.Drawing.Size(57, 17);
+            this.lb100.TabIndex = 8;
+            this.lb100.Text = "Phone: ";
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Location = new System.Drawing.Point(723, 58);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(216, 22);
+            this.txtEmail.TabIndex = 6;
+            // 
+            // txtPhone
+            // 
+            this.txtPhone.Location = new System.Drawing.Point(132, 7);
+            this.txtPhone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(216, 22);
+            this.txtPhone.TabIndex = 3;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(664, 63);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(46, 17);
+            this.label22.TabIndex = 12;
+            this.label22.Text = "Email:";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(13, 58);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(113, 17);
+            this.label23.TabIndex = 10;
+            this.label23.Text = "Customer Name:";
             // 
             // tpEmployee
             // 
@@ -120,7 +284,7 @@
             this.tpEmployee.Margin = new System.Windows.Forms.Padding(4);
             this.tpEmployee.Name = "tpEmployee";
             this.tpEmployee.Padding = new System.Windows.Forms.Padding(4);
-            this.tpEmployee.Size = new System.Drawing.Size(1501, 628);
+            this.tpEmployee.Size = new System.Drawing.Size(1512, 628);
             this.tpEmployee.TabIndex = 0;
             this.tpEmployee.Text = "Employee";
             this.tpEmployee.UseVisualStyleBackColor = true;
@@ -148,7 +312,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(1096, 175);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(183, 47);
-            this.btnRefresh.TabIndex = 15;
+            this.btnRefresh.TabIndex = 29;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
@@ -191,7 +355,7 @@
             this.btnChooseImage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnChooseImage.Name = "btnChooseImage";
             this.btnChooseImage.Size = new System.Drawing.Size(171, 30);
-            this.btnChooseImage.TabIndex = 26;
+            this.btnChooseImage.TabIndex = 25;
             this.btnChooseImage.Text = "Choose Image";
             this.btnChooseImage.UseVisualStyleBackColor = true;
             this.btnChooseImage.Click += new System.EventHandler(this.btnChooseImage_Click);
@@ -202,7 +366,7 @@
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(187, 53);
-            this.btnUpdate.TabIndex = 6;
+            this.btnUpdate.TabIndex = 27;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
@@ -213,7 +377,7 @@
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(187, 52);
-            this.btnDelete.TabIndex = 7;
+            this.btnDelete.TabIndex = 28;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -226,7 +390,7 @@
             this.txtImage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtImage.Name = "txtImage";
             this.txtImage.Size = new System.Drawing.Size(169, 22);
-            this.txtImage.TabIndex = 25;
+            this.txtImage.TabIndex = 24;
             // 
             // label13
             // 
@@ -254,7 +418,7 @@
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(187, 48);
-            this.btnAdd.TabIndex = 4;
+            this.btnAdd.TabIndex = 26;
             this.btnAdd.Text = "Add New Car";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -274,7 +438,7 @@
             this.txtPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(215, 22);
-            this.txtPrice.TabIndex = 21;
+            this.txtPrice.TabIndex = 22;
             // 
             // label11
             // 
@@ -291,7 +455,7 @@
             this.txtColor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtColor.Name = "txtColor";
             this.txtColor.Size = new System.Drawing.Size(216, 22);
-            this.txtColor.TabIndex = 19;
+            this.txtColor.TabIndex = 21;
             // 
             // label10
             // 
@@ -308,7 +472,7 @@
             this.txtOrigin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtOrigin.Name = "txtOrigin";
             this.txtOrigin.Size = new System.Drawing.Size(216, 22);
-            this.txtOrigin.TabIndex = 17;
+            this.txtOrigin.TabIndex = 20;
             // 
             // label9
             // 
@@ -334,7 +498,7 @@
             this.txtModel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtModel.Name = "txtModel";
             this.txtModel.Size = new System.Drawing.Size(216, 22);
-            this.txtModel.TabIndex = 6;
+            this.txtModel.TabIndex = 19;
             // 
             // txtBrand
             // 
@@ -342,7 +506,7 @@
             this.txtBrand.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtBrand.Name = "txtBrand";
             this.txtBrand.Size = new System.Drawing.Size(216, 22);
-            this.txtBrand.TabIndex = 7;
+            this.txtBrand.TabIndex = 18;
             // 
             // label7
             // 
@@ -368,7 +532,7 @@
             this.txtType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtType.Name = "txtType";
             this.txtType.Size = new System.Drawing.Size(216, 22);
-            this.txtType.TabIndex = 13;
+            this.txtType.TabIndex = 17;
             // 
             // txtCarID
             // 
@@ -376,7 +540,7 @@
             this.txtCarID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCarID.Name = "txtCarID";
             this.txtCarID.Size = new System.Drawing.Size(216, 22);
-            this.txtCarID.TabIndex = 9;
+            this.txtCarID.TabIndex = 15;
             // 
             // label6
             // 
@@ -402,7 +566,7 @@
             this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(216, 22);
-            this.txtName.TabIndex = 11;
+            this.txtName.TabIndex = 16;
             // 
             // btnDetail
             // 
@@ -410,7 +574,7 @@
             this.btnDetail.Margin = new System.Windows.Forms.Padding(4);
             this.btnDetail.Name = "btnDetail";
             this.btnDetail.Size = new System.Drawing.Size(171, 48);
-            this.btnDetail.TabIndex = 5;
+            this.btnDetail.TabIndex = 30;
             this.btnDetail.Text = "Detail";
             this.btnDetail.UseVisualStyleBackColor = true;
             // 
@@ -429,7 +593,7 @@
             this.txtSearchCar.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearchCar.Name = "txtSearchCar";
             this.txtSearchCar.Size = new System.Drawing.Size(543, 22);
-            this.txtSearchCar.TabIndex = 2;
+            this.txtSearchCar.TabIndex = 31;
             // 
             // label1
             // 
@@ -453,24 +617,13 @@
             this.dgvCar.TabIndex = 0;
             this.dgvCar.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCar_CellClick);
             // 
-            // tbCustomer
-            // 
-            this.tbCustomer.Location = new System.Drawing.Point(4, 25);
-            this.tbCustomer.Margin = new System.Windows.Forms.Padding(4);
-            this.tbCustomer.Name = "tbCustomer";
-            this.tbCustomer.Padding = new System.Windows.Forms.Padding(4);
-            this.tbCustomer.Size = new System.Drawing.Size(1501, 628);
-            this.tbCustomer.TabIndex = 2;
-            this.tbCustomer.Text = "Customer";
-            this.tbCustomer.UseVisualStyleBackColor = true;
-            // 
             // tpInvoice
             // 
             this.tpInvoice.Location = new System.Drawing.Point(4, 25);
             this.tpInvoice.Margin = new System.Windows.Forms.Padding(4);
             this.tpInvoice.Name = "tpInvoice";
             this.tpInvoice.Padding = new System.Windows.Forms.Padding(4);
-            this.tpInvoice.Size = new System.Drawing.Size(1501, 628);
+            this.tpInvoice.Size = new System.Drawing.Size(1512, 628);
             this.tpInvoice.TabIndex = 3;
             this.tpInvoice.Text = "Manage Invoice";
             this.tpInvoice.UseVisualStyleBackColor = true;
@@ -521,6 +674,34 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "ID: ";
             // 
+            // dgvCustomer
+            // 
+            this.dgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCustomer.Location = new System.Drawing.Point(23, 212);
+            this.dgvCustomer.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvCustomer.Name = "dgvCustomer";
+            this.dgvCustomer.ReadOnly = true;
+            this.dgvCustomer.RowHeadersWidth = 51;
+            this.dgvCustomer.Size = new System.Drawing.Size(1065, 366);
+            this.dgvCustomer.TabIndex = 11;
+            // 
+            // pictureBoxCustomer
+            // 
+            this.pictureBoxCustomer.Location = new System.Drawing.Point(1096, 212);
+            this.pictureBoxCustomer.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxCustomer.Name = "pictureBoxCustomer";
+            this.pictureBoxCustomer.Size = new System.Drawing.Size(383, 366);
+            this.pictureBoxCustomer.TabIndex = 17;
+            this.pictureBoxCustomer.TabStop = false;
+            // 
+            // txtCustomerName
+            // 
+            this.txtCustomerName.Location = new System.Drawing.Point(132, 55);
+            this.txtCustomerName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCustomerName.Name = "txtCustomerName";
+            this.txtCustomerName.Size = new System.Drawing.Size(216, 22);
+            this.txtCustomerName.TabIndex = 4;
+            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -534,6 +715,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Admin";
             this.tcAdmin.ResumeLayout(false);
+            this.tbCustomer.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.tbCar.ResumeLayout(false);
             this.tbCar.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -542,6 +726,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCar)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -590,5 +776,21 @@
         private System.Windows.Forms.Button btnChooseImage;
         private System.Windows.Forms.OpenFileDialog openFile;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button btnUpdateCus;
+        private System.Windows.Forms.Button btnDeleteCus;
+        private System.Windows.Forms.Button btnAddCus;
+        private System.Windows.Forms.TextBox txtAddress;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lb100;
+        private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.TextBox txtPhone;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox txtSearchCustomer;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.PictureBox pictureBoxCustomer;
+        private System.Windows.Forms.DataGridView dgvCustomer;
+        private System.Windows.Forms.TextBox txtCustomerName;
     }
 }

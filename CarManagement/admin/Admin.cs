@@ -24,7 +24,9 @@ namespace CarManagement.admin
         public delegate void LoginSuccessfull(EmployeeDTO dto);
         public LoginSuccessfull data;
         readonly CarDAO dao = new CarDAO();
+        readonly CustomerDAO daoCus = new CustomerDAO();
         DataTable dtCar;
+        DataTable dtCustomer;
         string filePath = "";
         public Admin()
         {
@@ -49,6 +51,10 @@ namespace CarManagement.admin
             dgvCar.DataSource = dtCar;
             dgvCar.Columns["ImagesName"].Visible = false;
             dgvCar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dtCustomer = daoCus.getCustomerList();
+            dgvCustomer.DataSource = dtCustomer;
+            dgvCustomer.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            
         }
 
 
@@ -177,9 +183,54 @@ namespace CarManagement.admin
                 MessageBox.Show("Choose Image !", "Error");
                 return false;
             }
-            return true;
 
-        }
+            return true;
+        }//end checkField
+        private bool checkFiledCustomer()
+        {
+            if (!Check.getString(txtPhone.Text))
+            {
+                MessageBox.Show("Phone number is empty!", "Error");
+                txtPhone.Focus();
+                return false;
+            }
+            if (!daoCus.checkPhoneDulicate(txtPhone.Text))
+            {
+                MessageBox.Show("Phone number is duplicate!", "Error");
+            }
+            if (!Check.checkPhone(txtPhone.Text))
+            {
+                MessageBox.Show("Phone number: max length is 15,begin with 0 " +
+                    "and contain numeric characters only (0 – 9)", "Error");
+                return false;
+            }
+            if (!Check.getString(txtCustomerName.Text))
+            {
+                MessageBox.Show("Customer Name is empty!", "Error");
+                txtCustomerName.Focus();
+                return false;
+            }
+            if (!Check.getString(txtAddress.Text))
+            {
+                MessageBox.Show("Address is empty!", "Error");
+                txtAddress.Focus();
+                return false;
+            }
+            if (!Check.getString(txtEmail.Text))
+            {
+                MessageBox.Show("Email is empty!", "Error");
+                txtEmail.Focus();
+                return false;
+            }
+            if (!Check.checkEmail(txtEmail.Text))
+            {
+                MessageBox.Show("Email: max length is 30, contain only one “@” character" +
+                    ", do not contain special characters (!, #, $)", "Error");
+                txtEmail.Focus();
+                return false;
+            }
+            return true;
+        }//end Customer check field
 
         private void btnChooseImage_Click(object sender, EventArgs e)
         {
@@ -226,6 +277,12 @@ namespace CarManagement.admin
             cbStatus.Checked = false;
             txtImage.Text = "";
             filePath = "";
+            //refesh text customer
+            txtPhone.Enabled = true;
+            txtCustomerName.Text = "";
+            txtEmail.Text = "";
+            txtAddress.Text = "";
+
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -319,7 +376,7 @@ namespace CarManagement.admin
                 {
                     if (dao.insertNewCar(dto))
                     {
-                        MessageBox.Show("Successfully insert car with an ID of" + dto.carID, "Message");
+                        MessageBox.Show("Successfully insert car with an ID of: " + dto.carID, "Message");
                         string path = Path.Combine(appPath + "\\images\\" + dto.imageName);
                         FileInfo fi = new FileInfo(filePath);
                         fi.CopyTo(path);
@@ -341,5 +398,44 @@ namespace CarManagement.admin
                 return;
             }
         }
+
+
+        //Customer
+        private void btnAddCus_Click(object sender, EventArgs e)
+        {
+            bool check = checkFiledCustomer();
+            if (check)
+            {
+
+                CustomerDTO dtoCus = new CustomerDTO()
+                {
+                    phone = txtPhone.Text,
+                    customerName = txtCustomerName.Text,
+                    email = txtEmail.Text,
+                    address = txtAddress.Text
+                };
+                try
+                {
+                    if (daoCus.addNewCustomer(dtoCus))
+                    {
+                        MessageBox.Show("Successfully add Customer with phone: " + dtoCus.phone, "Message");
+                        loadData();
+                        refress();
+                    }
+                    else
+                    {
+                        MessageBox.Show("UnSuccessfully add Customer", "Message");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+            else
+            {
+                return;
+            }
+        }//end if add customer
     }
 }
