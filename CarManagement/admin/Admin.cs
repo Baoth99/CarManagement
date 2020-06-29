@@ -194,15 +194,15 @@ namespace CarManagement.admin
                 txtPhone.Focus();
                 return false;
             }
+            if (!Check.checkPhone(txtPhone.Text))
+            {
+                MessageBox.Show("Phone number is 10 number,begin with 0 " +
+                    "and contain numeric characters only (0 – 9)", "Error");
+                return false;
+            }
             if (!daoCus.checkPhoneDulicate(txtPhone.Text))
             {
                 MessageBox.Show("Phone number is duplicate!", "Error");
-            }
-            if (!Check.checkPhone(txtPhone.Text))
-            {
-                MessageBox.Show("Phone number: max length is 15,begin with 0 " +
-                    "and contain numeric characters only (0 – 9)", "Error");
-                return false;
             }
             if (!Check.getString(txtCustomerName.Text))
             {
@@ -411,7 +411,38 @@ namespace CarManagement.admin
         //Customer
         private void btnAddCus_Click(object sender, EventArgs e)
         {
-
+            bool check = checkFiledCustomer();
+            if (check)
+            {
+                CustomerDTO dtoCus = new CustomerDTO()
+                {
+                    phone = txtPhone.Text,
+                    customerName = txtCustomerName.Text,
+                    email = txtEmail.Text,
+                    address = txtAddress.Text,                   
+                };
+                try
+                {
+                    if (daoCus.addNewCustomer(dtoCus))
+                    {
+                        MessageBox.Show("Successfully add Customer with phone: " + dtoCus.phone, "Message");                  
+                        loadData();
+                        refress();
+                    }
+                    else
+                    {
+                        MessageBox.Show("UnSuccessfully add Customer", "Message");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }

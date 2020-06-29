@@ -36,7 +36,7 @@ namespace Tool.checkinput
         }
         public static bool checkPhone(string num)
         {
-            Regex regex = new Regex(@"^[0]{1}[0-9]{9,15}$");
+            Regex regex = new Regex(@"^[0]{1}[0-9]{9}$");
             return regex.IsMatch(num);
         }
         public static bool checkEmail(String email)
