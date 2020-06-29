@@ -47,6 +47,7 @@ namespace CarManagement.admin
         }
         private void loadData()
         {
+            dgvCar.DataSource = null;
             dtCar = dao.getCarList();
             dgvCar.DataSource = dtCar;
             dgvCar.Columns["ImagesName"].Visible = false;
@@ -56,8 +57,6 @@ namespace CarManagement.admin
             dgvCustomer.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             
         }
-
-
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
@@ -347,7 +346,29 @@ namespace CarManagement.admin
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            if (!Check.getString(txtCarID.Text))
+            {
+                MessageBox.Show("Please choose car that you want to delete !", "Error");
+                txtCarID.Focus();
+                return;
+            }
+            try
+            {
+                MessageBoxButtons button = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show("Do you want to delete car " + txtCarID.Text + " ? ", "Delete Car", button);
+                if (result.Equals(DialogResult.Yes))
+                {
+                    string mess = (dao.deleteCar(txtCarID.Text) == true) ? "Sucessfull !" : "Fail !";
+                    MessageBox.Show("Delete Car " + txtCarID.Text + " is " + mess + " !", "Delete Car");
+                    loadData();
+                    refress();
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -374,7 +395,7 @@ namespace CarManagement.admin
                 };
                 try
                 {
-                    if (dao.insertNewCar(dto))
+                    if (dao.updateCar(dto))
                     {
                         MessageBox.Show("Successfully insert car with an ID of: " + dto.carID, "Message");
                         string path = Path.Combine(appPath + "\\images\\" + dto.imageName);
@@ -398,44 +419,5 @@ namespace CarManagement.admin
                 return;
             }
         }
-
-
-        //Customer
-        private void btnAddCus_Click(object sender, EventArgs e)
-        {
-            bool check = checkFiledCustomer();
-            if (check)
-            {
-
-                CustomerDTO dtoCus = new CustomerDTO()
-                {
-                    phone = txtPhone.Text,
-                    customerName = txtCustomerName.Text,
-                    email = txtEmail.Text,
-                    address = txtAddress.Text
-                };
-                try
-                {
-                    if (daoCus.addNewCustomer(dtoCus))
-                    {
-                        MessageBox.Show("Successfully add Customer with phone: " + dtoCus.phone, "Message");
-                        loadData();
-                        refress();
-                    }
-                    else
-                    {
-                        MessageBox.Show("UnSuccessfully add Customer", "Message");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-            }
-            else
-            {
-                return;
-            }
-        }//end if add customer
     }
 }
