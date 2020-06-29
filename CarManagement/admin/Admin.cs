@@ -194,15 +194,15 @@ namespace CarManagement.admin
                 txtPhone.Focus();
                 return false;
             }
+            if (!Check.checkPhone(txtPhone.Text))
+            {
+                MessageBox.Show("Phone number is 10 number,begin with 0 " +
+                    "and contain numeric characters only (0 – 9)", "Error");
+                return false;
+            }
             if (!daoCus.checkPhoneDulicate(txtPhone.Text))
             {
                 MessageBox.Show("Phone number is duplicate!", "Error");
-            }
-            if (!Check.checkPhone(txtPhone.Text))
-            {
-                MessageBox.Show("Phone number: max length is 15,begin with 0 " +
-                    "and contain numeric characters only (0 – 9)", "Error");
-                return false;
             }
             if (!Check.getString(txtCustomerName.Text))
             {
