@@ -419,5 +419,10 @@ namespace CarManagement.admin
                 return;
             }
         }
+
+        private void btnAddCus_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

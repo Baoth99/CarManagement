@@ -32,7 +32,10 @@
             this.btnLogout = new System.Windows.Forms.Button();
             this.tcAdmin = new System.Windows.Forms.TabControl();
             this.tbCustomer = new System.Windows.Forms.TabPage();
+            this.pictureBoxCustomer = new System.Windows.Forms.PictureBox();
+            this.dgvCustomer = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.txtCustomerName = new System.Windows.Forms.TextBox();
             this.txtSearchCustomer = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.btnUpdateCus = new System.Windows.Forms.Button();
@@ -84,19 +87,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.openFile = new System.Windows.Forms.OpenFileDialog();
-            this.dgvCustomer = new System.Windows.Forms.DataGridView();
-            this.pictureBoxCustomer = new System.Windows.Forms.PictureBox();
-            this.txtCustomerName = new System.Windows.Forms.TextBox();
             this.tcAdmin.SuspendLayout();
             this.tbCustomer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).BeginInit();
             this.panel3.SuspendLayout();
             this.tbCar.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCar)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomer)).BeginInit();
             this.SuspendLayout();
             // 
             // lbID
@@ -148,6 +148,26 @@
             this.tbCustomer.Text = "Customer";
             this.tbCustomer.UseVisualStyleBackColor = true;
             // 
+            // pictureBoxCustomer
+            // 
+            this.pictureBoxCustomer.Location = new System.Drawing.Point(1096, 212);
+            this.pictureBoxCustomer.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxCustomer.Name = "pictureBoxCustomer";
+            this.pictureBoxCustomer.Size = new System.Drawing.Size(383, 366);
+            this.pictureBoxCustomer.TabIndex = 17;
+            this.pictureBoxCustomer.TabStop = false;
+            // 
+            // dgvCustomer
+            // 
+            this.dgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCustomer.Location = new System.Drawing.Point(23, 212);
+            this.dgvCustomer.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvCustomer.Name = "dgvCustomer";
+            this.dgvCustomer.ReadOnly = true;
+            this.dgvCustomer.RowHeadersWidth = 51;
+            this.dgvCustomer.Size = new System.Drawing.Size(1065, 366);
+            this.dgvCustomer.TabIndex = 11;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.txtCustomerName);
@@ -168,6 +188,14 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1467, 146);
             this.panel3.TabIndex = 15;
+            // 
+            // txtCustomerName
+            // 
+            this.txtCustomerName.Location = new System.Drawing.Point(132, 55);
+            this.txtCustomerName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCustomerName.Name = "txtCustomerName";
+            this.txtCustomerName.Size = new System.Drawing.Size(216, 22);
+            this.txtCustomerName.TabIndex = 4;
             // 
             // txtSearchCustomer
             // 
@@ -674,34 +702,6 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "ID: ";
             // 
-            // dgvCustomer
-            // 
-            this.dgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCustomer.Location = new System.Drawing.Point(23, 212);
-            this.dgvCustomer.Margin = new System.Windows.Forms.Padding(4);
-            this.dgvCustomer.Name = "dgvCustomer";
-            this.dgvCustomer.ReadOnly = true;
-            this.dgvCustomer.RowHeadersWidth = 51;
-            this.dgvCustomer.Size = new System.Drawing.Size(1065, 366);
-            this.dgvCustomer.TabIndex = 11;
-            // 
-            // pictureBoxCustomer
-            // 
-            this.pictureBoxCustomer.Location = new System.Drawing.Point(1096, 212);
-            this.pictureBoxCustomer.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBoxCustomer.Name = "pictureBoxCustomer";
-            this.pictureBoxCustomer.Size = new System.Drawing.Size(383, 366);
-            this.pictureBoxCustomer.TabIndex = 17;
-            this.pictureBoxCustomer.TabStop = false;
-            // 
-            // txtCustomerName
-            // 
-            this.txtCustomerName.Location = new System.Drawing.Point(132, 55);
-            this.txtCustomerName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Size = new System.Drawing.Size(216, 22);
-            this.txtCustomerName.TabIndex = 4;
-            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -716,6 +716,8 @@
             this.Text = "Admin";
             this.tcAdmin.ResumeLayout(false);
             this.tbCustomer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.tbCar.ResumeLayout(false);
@@ -726,8 +728,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCar)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomer)).EndInit();
             this.ResumeLayout(false);
 
         }
