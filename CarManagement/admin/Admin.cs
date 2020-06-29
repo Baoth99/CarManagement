@@ -422,7 +422,38 @@ namespace CarManagement.admin
 
         private void btnAddCus_Click(object sender, EventArgs e)
         {
-
+            bool check = checkFiledCustomer();
+            if (check)
+            {
+                CustomerDTO dtoCus = new CustomerDTO()
+                {
+                    phone = txtPhone.Text,
+                    customerName = txtCustomerName.Text,
+                    email = txtEmail.Text,
+                    address = txtAddress.Text,                   
+                };
+                try
+                {
+                    if (daoCus.addNewCustomer(dtoCus))
+                    {
+                        MessageBox.Show("Successfully add Customer with phone: " + dtoCus.phone, "Message");                  
+                        loadData();
+                        refress();
+                    }
+                    else
+                    {
+                        MessageBox.Show("UnSuccessfully add Customer", "Message");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }
