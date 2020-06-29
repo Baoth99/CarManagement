@@ -120,7 +120,7 @@
             this.tpEmployee.Margin = new System.Windows.Forms.Padding(4);
             this.tpEmployee.Name = "tpEmployee";
             this.tpEmployee.Padding = new System.Windows.Forms.Padding(4);
-            this.tpEmployee.Size = new System.Drawing.Size(1501, 628);
+            this.tpEmployee.Size = new System.Drawing.Size(1512, 628);
             this.tpEmployee.TabIndex = 0;
             this.tpEmployee.Text = "Employee";
             this.tpEmployee.UseVisualStyleBackColor = true;
@@ -443,6 +443,8 @@
             // 
             // dgvCar
             // 
+            this.dgvCar.AllowUserToAddRows = false;
+            this.dgvCar.AllowUserToDeleteRows = false;
             this.dgvCar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCar.Location = new System.Drawing.Point(23, 239);
             this.dgvCar.Margin = new System.Windows.Forms.Padding(4);
@@ -459,7 +461,7 @@
             this.tbCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.tbCustomer.Name = "tbCustomer";
             this.tbCustomer.Padding = new System.Windows.Forms.Padding(4);
-            this.tbCustomer.Size = new System.Drawing.Size(1501, 628);
+            this.tbCustomer.Size = new System.Drawing.Size(1512, 628);
             this.tbCustomer.TabIndex = 2;
             this.tbCustomer.Text = "Customer";
             this.tbCustomer.UseVisualStyleBackColor = true;
@@ -470,7 +472,7 @@
             this.tpInvoice.Margin = new System.Windows.Forms.Padding(4);
             this.tpInvoice.Name = "tpInvoice";
             this.tpInvoice.Padding = new System.Windows.Forms.Padding(4);
-            this.tpInvoice.Size = new System.Drawing.Size(1501, 628);
+            this.tpInvoice.Size = new System.Drawing.Size(1512, 628);
             this.tpInvoice.TabIndex = 3;
             this.tpInvoice.Text = "Manage Invoice";
             this.tpInvoice.UseVisualStyleBackColor = true;
