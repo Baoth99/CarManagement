@@ -42,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="daos\CustomerDAO.cs" />
     <Compile Include="daos\EmployeeDAO.cs" />
     <Compile Include="dtos\CarDTO.cs" />
+    <Compile Include="dtos\CustomerDTO.cs" />
     <Compile Include="utils\DBConnection.cs" />
     <Compile Include="daos\CarDAO.cs" />
     <Compile Include="dtos\EmployeeDTO.cs" />
