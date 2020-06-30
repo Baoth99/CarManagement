@@ -140,5 +140,42 @@ namespace Data.daos
             }
             return result;
         }//end AddCustomer
+        public bool deleteCustomer(string phone)
+        {
+            SqlConnection conn = null;
+            SqlCommand cmd = null;
+            bool result = false;
+            try
+            {
+                conn = utils.DBConnection.GetConnection();
+                cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "deleteCustomer";
+                cmd.Parameters.Add("@Phone", SqlDbType.Char).Value = phone;
+                cmd.Connection = conn;
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                result = (cmd.ExecuteNonQuery() < 0);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (cmd != null)
+                {
+                    cmd.Cancel();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
+            }
+            return result;
+        }//end delete Customer
     }//end customerDAO
 }

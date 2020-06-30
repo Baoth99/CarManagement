@@ -91,7 +91,7 @@ namespace CarManagement.admin
                 {
                     if (dao.insertNewCar(dto))
                     {
-                        MessageBox.Show("Successfully insert car with an ID of" + dto.carID, "Message");
+                        MessageBox.Show("Successfully insert car with an ID of: " + dto.carID, "Message");
                         string path = Path.Combine(appPath + "\\images\\" + dto.imageName);
                         FileInfo fi = new FileInfo(filePath);
                         fi.CopyTo(path);
@@ -289,7 +289,7 @@ namespace CarManagement.admin
             refress();
         }
 
-        private void databindings_clear()
+        private void databindings_clear_Car()
         {
             txtCarID.DataBindings.Clear();
             txtName.DataBindings.Clear();
@@ -303,7 +303,7 @@ namespace CarManagement.admin
             txtImage.DataBindings.Clear();
         }
 
-        private void showTextBox()
+        private void showTextBoxCar()
         {
             txtCarID.Enabled = false;
             txtCarID.DataBindings.Add("Text", dtCar, "CarID");
@@ -333,8 +333,8 @@ namespace CarManagement.admin
                      string imageName = dgvCar.Rows[numRow].Cells[9].Value.ToString();
                      showImage(imageName);
                  }*/
-                databindings_clear();
-                showTextBox();
+                databindings_clear_Car();
+                showTextBoxCar();
                 string imageName = txtImage.Text;
                 showImage(imageName);
             }
@@ -453,6 +453,68 @@ namespace CarManagement.admin
             else
             {
                 return;
+            }
+        }
+
+        private void btnRefreshCus_Click(object sender, EventArgs e)
+        {
+            refress();
+        }
+
+        private void btnDeleteCus_Click(object sender, EventArgs e)
+        {
+            if (!Check.getString(txtPhone.Text))
+            {
+                MessageBox.Show("Please choose Customer that you want to delete!", "Error");
+                txtPhone.Focus();
+                return;
+            }
+            try
+            {
+                MessageBoxButtons button = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show("Do you want to delete Customer " + txtPhone.Text + " ? ", "Delete Customer", button);
+                if (result.Equals(DialogResult.Yes))
+                {
+                    string mess = (daoCus.deleteCustomer(txtPhone.Text) == true) ? "Sucessfull !" : "Fail !";
+                    MessageBox.Show("Delete Customer " + txtPhone.Text + " is " + mess + " !", "Delete Customer");
+                    loadData();
+                    refress();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }//end Delete Customer
+
+        private void databindings_clear_Customer()
+        {
+            txtPhone.DataBindings.Clear();
+            txtCustomerName.DataBindings.Clear();
+            txtEmail.DataBindings.Clear();
+            txtAddress.DataBindings.Clear();         
+        }
+
+        private void showTextBox_Customer()
+        {
+            txtPhone.Enabled = false;
+            txtPhone.DataBindings.Add("Text", dtCustomer, "Phone");
+            txtCustomerName.DataBindings.Add("Text", dtCustomer, "CustomerName");
+            txtEmail.DataBindings.Add("Text", dtCustomer, "Email");
+            txtAddress.DataBindings.Add("Text", dtCustomer, "Address");
+        }
+
+        private void dgvCustomer_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {
+                databindings_clear_Customer();
+                showTextBox_Customer();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }

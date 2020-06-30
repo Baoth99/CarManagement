@@ -87,6 +87,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.openFile = new System.Windows.Forms.OpenFileDialog();
+            this.btnRefreshCus = new System.Windows.Forms.Button();
             this.tcAdmin.SuspendLayout();
             this.tbCustomer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomer)).BeginInit();
@@ -167,9 +168,11 @@
             this.dgvCustomer.RowHeadersWidth = 51;
             this.dgvCustomer.Size = new System.Drawing.Size(1065, 366);
             this.dgvCustomer.TabIndex = 11;
+            this.dgvCustomer.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCustomer_CellMouseClick);
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnRefreshCus);
             this.panel3.Controls.Add(this.txtCustomerName);
             this.panel3.Controls.Add(this.txtSearchCustomer);
             this.panel3.Controls.Add(this.label15);
@@ -217,7 +220,7 @@
             // 
             // btnUpdateCus
             // 
-            this.btnUpdateCus.Location = new System.Drawing.Point(1064, 77);
+            this.btnUpdateCus.Location = new System.Drawing.Point(1263, 10);
             this.btnUpdateCus.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdateCus.Name = "btnUpdateCus";
             this.btnUpdateCus.Size = new System.Drawing.Size(187, 53);
@@ -227,13 +230,14 @@
             // 
             // btnDeleteCus
             // 
-            this.btnDeleteCus.Location = new System.Drawing.Point(1263, 77);
+            this.btnDeleteCus.Location = new System.Drawing.Point(1064, 75);
             this.btnDeleteCus.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteCus.Name = "btnDeleteCus";
             this.btnDeleteCus.Size = new System.Drawing.Size(187, 52);
             this.btnDeleteCus.TabIndex = 10;
             this.btnDeleteCus.Text = "Delete";
             this.btnDeleteCus.UseVisualStyleBackColor = true;
+            this.btnDeleteCus.Click += new System.EventHandler(this.btnDeleteCus_Click);
             // 
             // btnAddCus
             // 
@@ -702,6 +706,17 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "ID: ";
             // 
+            // btnRefreshCus
+            // 
+            this.btnRefreshCus.Location = new System.Drawing.Point(1263, 77);
+            this.btnRefreshCus.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRefreshCus.Name = "btnRefreshCus";
+            this.btnRefreshCus.Size = new System.Drawing.Size(187, 52);
+            this.btnRefreshCus.TabIndex = 28;
+            this.btnRefreshCus.Text = "Refresh";
+            this.btnRefreshCus.UseVisualStyleBackColor = true;
+            this.btnRefreshCus.Click += new System.EventHandler(this.btnRefreshCus_Click);
+            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -792,5 +807,6 @@
         private System.Windows.Forms.PictureBox pictureBoxCustomer;
         private System.Windows.Forms.DataGridView dgvCustomer;
         private System.Windows.Forms.TextBox txtCustomerName;
+        private System.Windows.Forms.Button btnRefreshCus;
     }
 }
