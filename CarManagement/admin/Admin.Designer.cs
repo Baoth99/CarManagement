@@ -35,6 +35,7 @@
             this.pictureBoxCustomer = new System.Windows.Forms.PictureBox();
             this.dgvCustomer = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnRefreshCus = new System.Windows.Forms.Button();
             this.txtCustomerName = new System.Windows.Forms.TextBox();
             this.txtSearchCustomer = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -87,7 +88,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.openFile = new System.Windows.Forms.OpenFileDialog();
-            this.btnRefreshCus = new System.Windows.Forms.Button();
             this.tcAdmin.SuspendLayout();
             this.tbCustomer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomer)).BeginInit();
@@ -191,6 +191,17 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1467, 146);
             this.panel3.TabIndex = 15;
+            // 
+            // btnRefreshCus
+            // 
+            this.btnRefreshCus.Location = new System.Drawing.Point(1263, 77);
+            this.btnRefreshCus.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRefreshCus.Name = "btnRefreshCus";
+            this.btnRefreshCus.Size = new System.Drawing.Size(187, 52);
+            this.btnRefreshCus.TabIndex = 28;
+            this.btnRefreshCus.Text = "Refresh";
+            this.btnRefreshCus.UseVisualStyleBackColor = true;
+            this.btnRefreshCus.Click += new System.EventHandler(this.btnRefreshCus_Click);
             // 
             // txtCustomerName
             // 
@@ -705,17 +716,6 @@
             this.label2.Size = new System.Drawing.Size(40, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "ID: ";
-            // 
-            // btnRefreshCus
-            // 
-            this.btnRefreshCus.Location = new System.Drawing.Point(1263, 77);
-            this.btnRefreshCus.Margin = new System.Windows.Forms.Padding(4);
-            this.btnRefreshCus.Name = "btnRefreshCus";
-            this.btnRefreshCus.Size = new System.Drawing.Size(187, 52);
-            this.btnRefreshCus.TabIndex = 28;
-            this.btnRefreshCus.Text = "Refresh";
-            this.btnRefreshCus.UseVisualStyleBackColor = true;
-            this.btnRefreshCus.Click += new System.EventHandler(this.btnRefreshCus_Click);
             // 
             // Admin
             // 

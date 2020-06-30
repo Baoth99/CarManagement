@@ -65,6 +65,7 @@ namespace CarManagement.admin
             this.Close();
         }
 
+        //Car
         private void btnAdd_Click(object sender, EventArgs e)
         {
             bool check = checkField();
@@ -278,6 +279,7 @@ namespace CarManagement.admin
             filePath = "";
             //refesh text customer
             txtPhone.Enabled = true;
+            txtPhone.Text = "";
             txtCustomerName.Text = "";
             txtEmail.Text = "";
             txtAddress.Text = "";
@@ -321,7 +323,6 @@ namespace CarManagement.admin
         {
             try
             {
-
                 /* pictureBoxCar.DataBindings.Clear();
                  int numRow = e.RowIndex;
                  if (numRow < 0)
@@ -419,7 +420,7 @@ namespace CarManagement.admin
                 return;
             }
         }
-
+        //Customer
         private void btnAddCus_Click(object sender, EventArgs e)
         {
             bool check = checkFiledCustomer();
@@ -517,5 +518,7 @@ namespace CarManagement.admin
                 throw new Exception(ex.Message);
             }
         }
+
+       
     }
 }
