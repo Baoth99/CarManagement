@@ -68,7 +68,7 @@ namespace CarManagement.admin
         //Car
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            bool check = checkField();
+            bool check = checkFieldCar("INSERT");
             if (check)
             {
                 string appPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
@@ -92,10 +92,10 @@ namespace CarManagement.admin
                 {
                     if (dao.insertNewCar(dto))
                     {
-                        MessageBox.Show("Successfully insert car with an ID of: " + dto.carID, "Message");
                         string path = Path.Combine(appPath + "\\images\\" + dto.imageName);
                         FileInfo fi = new FileInfo(filePath);
                         fi.CopyTo(path);
+                        MessageBox.Show("Successfully insert car with an ID of: " + dto.carID, "Message");
                         filePath = "";
                         loadData();
                         refress();
@@ -116,7 +116,7 @@ namespace CarManagement.admin
             }
         }
 
-        private bool checkField()
+        private bool checkFieldCar(string action)
         {
             if(!Check.getString(txtCarID.Text))
             {
@@ -124,11 +124,14 @@ namespace CarManagement.admin
                 txtCarID.Focus();
                 return false;
             }
-            if (!dao.checkIDDulicate(txtCarID.Text))
+            if (action.Equals("INSERT"))
             {
-                MessageBox.Show("CarID is duplicate !", "Error");
-                txtCarID.Focus();
-                return false;
+                if (!dao.checkIDDulicate(txtCarID.Text))
+                {
+                    MessageBox.Show("CarID is duplicate !", "Error");
+                    txtCarID.Focus();
+                    return false;
+                }
             }
             if(!Check.getString(txtName.Text))
             {
@@ -259,7 +262,6 @@ namespace CarManagement.admin
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
         }
@@ -289,6 +291,7 @@ namespace CarManagement.admin
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             refress();
+            databindings_clear_Car();
         }
 
         private void databindings_clear_Car()
@@ -323,21 +326,18 @@ namespace CarManagement.admin
         {
             try
             {
-                /* pictureBoxCar.DataBindings.Clear();
-                 int numRow = e.RowIndex;
-                 if (numRow < 0)
-                 {
-                     return;
-                 }
-                 else
-                 {
-                     string imageName = dgvCar.Rows[numRow].Cells[9].Value.ToString();
-                     showImage(imageName);
-                 }*/
-                databindings_clear_Car();
-                showTextBoxCar();
-                string imageName = txtImage.Text;
-                showImage(imageName);
+                if (dgvCar.RowCount == 0)
+                {
+                    return;
+                }
+                else
+                {
+                    databindings_clear_Car();
+                    showTextBoxCar();
+                    string imageName = "";
+                    imageName = txtImage.Text;
+                    showImage(imageName);
+                }
             }
             catch (Exception ex)
             {
@@ -362,6 +362,7 @@ namespace CarManagement.admin
                     string mess = (dao.deleteCar(txtCarID.Text) == true) ? "Sucessfull !" : "Fail !";
                     MessageBox.Show("Delete Car " + txtCarID.Text + " is " + mess + " !", "Delete Car");
                     loadData();
+                    filePath = "";
                     refress();
                     
                 }
@@ -374,51 +375,85 @@ namespace CarManagement.admin
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            bool check = checkField();
-            if (check)
-            {
-                string appPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
-                string fileName = Path.GetFileNameWithoutExtension(txtImage.Text);
-                string extension = Path.GetExtension(txtImage.Text);
-                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                CarDTO dto = new CarDTO()
-                {
-                    carID = txtCarID.Text,
-                    name = txtName.Text,
-                    type = txtType.Text,
-                    brand = txtBrand.Text,
-                    model = txtModel.Text,
-                    origin = txtOrigin.Text,
-                    color = txtColor.Text,
-                    price = float.Parse(txtPrice.Text),
-                    status = cbStatus.Checked,
-                    imageName = fileName
-                };
-                try
-                {
-                    if (dao.updateCar(dto))
-                    {
-                        MessageBox.Show("Successfully insert car with an ID of: " + dto.carID, "Message");
-                        string path = Path.Combine(appPath + "\\images\\" + dto.imageName);
-                        FileInfo fi = new FileInfo(filePath);
-                        fi.CopyTo(path);
-                        filePath = "";
-                        loadData();
-                    }
-                    else
-                    {
-                        MessageBox.Show("UnSuccessfully insert car", "Message");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-            }
-            else
-            {
-                return;
-            }
+            //bool check = checkFieldCar("UPDATE");
+            //if (check)
+            //{
+            //    if (txtImage.Text.Equals(image))
+            //    {
+            //        CarDTO dto = new CarDTO()
+            //        {
+            //            carID = txtCarID.Text,
+            //            name = txtName.Text,
+            //            type = txtType.Text,
+            //            brand = txtBrand.Text,
+            //            model = txtModel.Text,
+            //            origin = txtOrigin.Text,
+            //            color = txtColor.Text,
+            //            price = float.Parse(txtPrice.Text),
+            //            status = cbStatus.Checked,
+            //            imageName = txtImage.Text
+            //        };
+            //        try
+            //        {
+            //            if (dao.updateCar(dto))
+            //            {
+            //                MessageBox.Show("Successfully update car with an ID of: " + dto.carID, "Message");
+            //                filePath = "";
+            //                image = "";
+            //                loadData();
+            //            }
+            //            else
+            //            {
+            //                MessageBox.Show("UnSuccessfully update car", "Message");
+            //            }
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            throw new Exception(ex.Message);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        string appPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            //        string fileName = Path.GetFileNameWithoutExtension(txtImage.Text);
+            //        string extension = Path.GetExtension(txtImage.Text);
+            //        fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+            //        CarDTO dto = new CarDTO()
+            //        {
+            //            carID = txtCarID.Text,
+            //            name = txtName.Text,
+            //            type = txtType.Text,
+            //            brand = txtBrand.Text,
+            //            model = txtModel.Text,
+            //            origin = txtOrigin.Text,
+            //            color = txtColor.Text,
+            //            price = float.Parse(txtPrice.Text),
+            //            status = cbStatus.Checked,
+            //            imageName = fileName
+            //        };
+            //        try
+            //        {
+            //            if (dao.updateCar(dto))
+            //            {
+            //                string path = Path.Combine(appPath + "\\images\\" + dto.imageName);
+            //                FileInfo fi = new FileInfo(filePath);
+            //                fi.CopyTo(path);
+            //                MessageBox.Show("Successfully update car with an ID of: " + dto.carID, "Message");
+            //                filePath = "";
+            //                image = "";
+            //                loadData();
+            //            }
+            //            else
+            //            {
+            //                MessageBox.Show("UnSuccessfully update car", "Message");
+            //            }
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            throw new Exception(ex.Message);
+            //        }
+            //    }  
+            //}
         }
         //Customer
         private void btnAddCus_Click(object sender, EventArgs e)
@@ -460,6 +495,7 @@ namespace CarManagement.admin
         private void btnRefreshCus_Click(object sender, EventArgs e)
         {
             refress();
+            databindings_clear_Customer();
         }
 
         private void btnDeleteCus_Click(object sender, EventArgs e)
@@ -519,6 +555,30 @@ namespace CarManagement.admin
             }
         }
 
-       
+        private void btnUpdateCus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSearchCar_TextChanged(object sender, EventArgs e)
+        {
+            databindings_clear_Car();
+            DataView dv = dtCar.DefaultView;
+            string filter = "Name like '%" + txtSearchCar.Text + "%'";
+            dv.RowFilter = filter;
+        }
+
+        private void txtSearchCustomer_TextChanged(object sender, EventArgs e)
+        {
+            databindings_clear_Customer();
+            DataView dv = dtCustomer.DefaultView;
+            string filter = "CustomerName like '%" + txtSearchCustomer.Text + "%'";
+            dv.RowFilter = filter;
+        }
+
+        private void Admin_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
