@@ -55,7 +55,7 @@ namespace CarManagement.admin
             dtCustomer = daoCus.getCustomerList();
             dgvCustomer.DataSource = dtCustomer;
             dgvCustomer.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            
+
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -97,6 +97,7 @@ namespace CarManagement.admin
                         fi.CopyTo(path);
                         MessageBox.Show("Successfully insert car with an ID of: " + dto.carID, "Message");
                         filePath = "";
+                        openFile.FileName = "";
                         loadData();
                         refress();
                     }
@@ -118,7 +119,7 @@ namespace CarManagement.admin
 
         private bool checkFieldCar(string action)
         {
-            if(!Check.getString(txtCarID.Text))
+            if (!Check.getString(txtCarID.Text))
             {
                 MessageBox.Show("CarID Field is empty !", "Error");
                 txtCarID.Focus();
@@ -133,7 +134,7 @@ namespace CarManagement.admin
                     return false;
                 }
             }
-            if(!Check.getString(txtName.Text))
+            if (!Check.getString(txtName.Text))
             {
                 MessageBox.Show("Name Field is empty !", "Error");
                 txtName.Focus();
@@ -157,7 +158,7 @@ namespace CarManagement.admin
                 txtModel.Focus();
                 return false;
             }
-            if(!Check.getString(txtOrigin.Text))
+            if (!Check.getString(txtOrigin.Text))
             {
                 MessageBox.Show("Origin Field is empty !", "Error");
                 txtOrigin.Focus();
@@ -249,7 +250,7 @@ namespace CarManagement.admin
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            } 
+            }
         }
 
         private void showImage(string imageName)
@@ -364,7 +365,7 @@ namespace CarManagement.admin
                     loadData();
                     filePath = "";
                     refress();
-                    
+
                 }
             }
             catch (Exception ex)
@@ -375,85 +376,58 @@ namespace CarManagement.admin
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            //bool check = checkFieldCar("UPDATE");
-            //if (check)
-            //{
-            //    if (txtImage.Text.Equals(image))
-            //    {
-            //        CarDTO dto = new CarDTO()
-            //        {
-            //            carID = txtCarID.Text,
-            //            name = txtName.Text,
-            //            type = txtType.Text,
-            //            brand = txtBrand.Text,
-            //            model = txtModel.Text,
-            //            origin = txtOrigin.Text,
-            //            color = txtColor.Text,
-            //            price = float.Parse(txtPrice.Text),
-            //            status = cbStatus.Checked,
-            //            imageName = txtImage.Text
-            //        };
-            //        try
-            //        {
-            //            if (dao.updateCar(dto))
-            //            {
-            //                MessageBox.Show("Successfully update car with an ID of: " + dto.carID, "Message");
-            //                filePath = "";
-            //                image = "";
-            //                loadData();
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show("UnSuccessfully update car", "Message");
-            //            }
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            throw new Exception(ex.Message);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        string appPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
-            //        string fileName = Path.GetFileNameWithoutExtension(txtImage.Text);
-            //        string extension = Path.GetExtension(txtImage.Text);
-            //        fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-            //        CarDTO dto = new CarDTO()
-            //        {
-            //            carID = txtCarID.Text,
-            //            name = txtName.Text,
-            //            type = txtType.Text,
-            //            brand = txtBrand.Text,
-            //            model = txtModel.Text,
-            //            origin = txtOrigin.Text,
-            //            color = txtColor.Text,
-            //            price = float.Parse(txtPrice.Text),
-            //            status = cbStatus.Checked,
-            //            imageName = fileName
-            //        };
-            //        try
-            //        {
-            //            if (dao.updateCar(dto))
-            //            {
-            //                string path = Path.Combine(appPath + "\\images\\" + dto.imageName);
-            //                FileInfo fi = new FileInfo(filePath);
-            //                fi.CopyTo(path);
-            //                MessageBox.Show("Successfully update car with an ID of: " + dto.carID, "Message");
-            //                filePath = "";
-            //                image = "";
-            //                loadData();
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show("UnSuccessfully update car", "Message");
-            //            }
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            throw new Exception(ex.Message);
-            //        }
-            //    }  
-            //}
+            CarDTO dto = null;
+            bool check = checkFieldCar("UPDATE");
+            if (check)
+            {
+                dto = new CarDTO()
+                {
+                    carID = txtCarID.Text,
+                    name = txtName.Text,
+                    type = txtType.Text,
+                    brand = txtBrand.Text,
+                    model = txtModel.Text,
+                    origin = txtOrigin.Text,
+                    color = txtColor.Text,
+                    price = float.Parse(txtPrice.Text),
+                    status = cbStatus.Checked
+                };
+                if (filePath.Length > 0 && filePath != "")
+                {
+                    txtImage.Text = openFile.SafeFileName;
+                    string appPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+                    string fileName = Path.GetFileNameWithoutExtension(txtImage.Text);
+                    string extension = Path.GetExtension(txtImage.Text);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    dto.imageName = txtImage.Text;
+                    string path = Path.Combine(appPath + "\\images\\" + dto.imageName);
+                    FileInfo fi = new FileInfo(filePath);
+                    fi.CopyTo(path);
+                } else
+                {
+                    dto.imageName = txtImage.Text;
+                }
+                try
+                {
+                    if (dao.updateCar(dto))
+                    {
+                        MessageBox.Show("Successfully update car with an ID of: " + dto.carID, "Message");
+                        filePath = "";
+                        openFile.FileName = "";
+                        loadData();
+                    }
+                    else
+                    {
+                        MessageBox.Show("UnSuccessfully update car", "Message");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+
+
         }
         //Customer
         private void btnAddCus_Click(object sender, EventArgs e)
@@ -466,13 +440,13 @@ namespace CarManagement.admin
                     phone = txtPhone.Text,
                     customerName = txtCustomerName.Text,
                     email = txtEmail.Text,
-                    address = txtAddress.Text,                   
+                    address = txtAddress.Text,
                 };
                 try
                 {
                     if (daoCus.addNewCustomer(dtoCus))
                     {
-                        MessageBox.Show("Successfully add Customer with phone: " + dtoCus.phone, "Message");                  
+                        MessageBox.Show("Successfully add Customer with phone: " + dtoCus.phone, "Message");
                         loadData();
                         refress();
                     }
@@ -530,7 +504,7 @@ namespace CarManagement.admin
             txtPhone.DataBindings.Clear();
             txtCustomerName.DataBindings.Clear();
             txtEmail.DataBindings.Clear();
-            txtAddress.DataBindings.Clear();         
+            txtAddress.DataBindings.Clear();
         }
 
         private void showTextBox_Customer()

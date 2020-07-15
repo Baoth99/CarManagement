@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Data.daos
 {
@@ -232,6 +233,106 @@ namespace Data.daos
                 }
             }
             return result;
+        }
+
+        public AutoCompleteStringCollection getCar()
+        {
+            SqlConnection conn = null;
+            SqlCommand cmd = null;
+            SqlDataReader reader = null;
+            AutoCompleteStringCollection listName = new AutoCompleteStringCollection();
+            try
+            {
+                conn = utils.DBConnection.GetConnection();
+                cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "getCar";
+                cmd.Connection = conn;
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                    reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            listName.Add(reader.GetString(1) + "-" + reader.GetString(0));
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                if (cmd != null)
+                {
+                    cmd.Cancel();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
+            }
+            return listName;
+        }
+
+        public CarDTO getCarByID(string id)
+        {
+            SqlConnection conn = null;
+            SqlCommand cmd = null;
+            SqlDataReader reader = null;
+            CarDTO dto = null;
+            try
+            {
+                conn = utils.DBConnection.GetConnection();
+                cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "getCarByID";
+                cmd.Parameters.Add("@carID", SqlDbType.NVarChar).Value = id.Trim();
+                cmd.Connection = conn;
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                    reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        if (reader.Read())
+                        {
+                            dto = new CarDTO();
+                            dto.carID = reader.GetString(0);
+                            dto.name = reader.GetString(1);
+                            dto.type = reader.GetString(2);
+                            dto.brand = reader.GetString(3);
+                            dto.model = reader.GetString(4);
+                            dto.price = (float)reader.GetDouble(5);
+                            dto.status = reader.GetBoolean(6);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                if (cmd != null)
+                {
+                    cmd.Cancel();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
+            }
+            return dto;
         }
     }
 } 

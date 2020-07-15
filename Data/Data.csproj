@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,8 +45,10 @@
   <ItemGroup>
     <Compile Include="daos\CustomerDAO.cs" />
     <Compile Include="daos\EmployeeDAO.cs" />
+    <Compile Include="daos\InvoiceDAO.cs" />
     <Compile Include="dtos\CarDTO.cs" />
     <Compile Include="dtos\CustomerDTO.cs" />
+    <Compile Include="dtos\InvoiceDTO.cs" />
     <Compile Include="utils\DBConnection.cs" />
     <Compile Include="daos\CarDAO.cs" />
     <Compile Include="dtos\EmployeeDTO.cs" />
