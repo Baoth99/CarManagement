@@ -26,6 +26,10 @@ namespace Tool.checkinput
             try
             {
                 float number = float.Parse(num);
+                if(number <= 0)
+                {
+                    return false;
+                }
                 return true;
             }
             catch (Exception)

@@ -55,6 +55,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnAddInvoice = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lbEmpID = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,12 +92,14 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(60, 150);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 21);
+            this.label2.Size = new System.Drawing.Size(85, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Enter CarID:";
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lbEmpID);
+            this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.lbPrice);
             this.panel1.Controls.Add(this.lbModel);
             this.panel1.Controls.Add(this.lbBrand);
@@ -319,6 +323,25 @@
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(24, 233);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(91, 17);
+            this.label12.TabIndex = 21;
+            this.label12.Text = "Employee ID:";
+            // 
+            // lbEmpID
+            // 
+            this.lbEmpID.AutoSize = true;
+            this.lbEmpID.Location = new System.Drawing.Point(173, 233);
+            this.lbEmpID.Name = "lbEmpID";
+            this.lbEmpID.Size = new System.Drawing.Size(20, 17);
+            this.lbEmpID.TabIndex = 22;
+            this.lbEmpID.Text = "...";
             // 
             // InsertInvoice
             // 
@@ -371,5 +394,7 @@
         private System.Windows.Forms.Label lnCusName;
         private System.Windows.Forms.Button btnAddInvoice;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lbEmpID;
     }
 }

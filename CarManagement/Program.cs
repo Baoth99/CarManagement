@@ -17,7 +17,7 @@ namespace CarManagement
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new InsertInvoice());
+            Application.Run(new Login());
         }
     }
 }

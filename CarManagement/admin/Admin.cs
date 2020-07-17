@@ -32,7 +32,9 @@ namespace CarManagement.admin
         {
             InitializeComponent();
             data = new LoginSuccessfull(ReceiveData);
-            loadData();
+            loadData(false);
+            refress();
+            setCombobox();
         }
 
         public void Login()
@@ -45,10 +47,10 @@ namespace CarManagement.admin
             lbID.Text = dto.id;
             lbName.Text = dto.fullName;
         }
-        private void loadData()
+        private void loadData(bool sold)
         {
             dgvCar.DataSource = null;
-            dtCar = dao.getCarList();
+            dtCar = dao.getCarList(sold);
             dgvCar.DataSource = dtCar;
             dgvCar.Columns["ImagesName"].Visible = false;
             dgvCar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -98,7 +100,7 @@ namespace CarManagement.admin
                         MessageBox.Show("Successfully insert car with an ID of: " + dto.carID, "Message");
                         filePath = "";
                         openFile.FileName = "";
-                        loadData();
+                        loadData(false);
                         refress();
                     }
                     else
@@ -178,7 +180,7 @@ namespace CarManagement.admin
             }
             if (!Check.getFloat(txtPrice.Text))
             {
-                MessageBox.Show("Price is number !", "Error");
+                MessageBox.Show("Price is number and greater than 0 !", "Error");
                 txtPrice.Focus();
                 return false;
             }
@@ -260,6 +262,7 @@ namespace CarManagement.admin
                 string appPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
                 this.pictureBoxCar.SizeMode = PictureBoxSizeMode.StretchImage;
                 pictureBoxCar.Image = new Bitmap(appPath + "//images//" + imageName);
+                appPath = "";
             }
             catch (Exception ex)
             {
@@ -280,6 +283,11 @@ namespace CarManagement.admin
             cbStatus.Checked = false;
             txtImage.Text = "";
             filePath = "";
+            pictureBoxCar.Image = null;
+            openFile.FileName = "";
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+            btnAdd.Enabled = true;
             //refesh text customer
             txtPhone.Enabled = true;
             txtPhone.Text = "";
@@ -338,11 +346,20 @@ namespace CarManagement.admin
                     string imageName = "";
                     imageName = txtImage.Text;
                     showImage(imageName);
+                    openFile.FileName = "";
+                    filePath = "";
+                    if (cbSale.GetItemText(cbSale.SelectedItem).Equals("Not sold yet"))
+                    {
+                        btnUpdate.Enabled = true;
+                        btnDelete.Enabled = true;
+                        btnChooseImage.Enabled = true;
+                    }
+                    btnAdd.Enabled = false;
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                return;
             }
         }
 
@@ -362,10 +379,11 @@ namespace CarManagement.admin
                 {
                     string mess = (dao.deleteCar(txtCarID.Text) == true) ? "Sucessfull !" : "Fail !";
                     MessageBox.Show("Delete Car " + txtCarID.Text + " is " + mess + " !", "Delete Car");
-                    loadData();
+                    loadData(false);
                     filePath = "";
+                    openFile.FileName = "";
+                    pictureBoxCar.Image = null;
                     refress();
-
                 }
             }
             catch (Exception ex)
@@ -403,7 +421,8 @@ namespace CarManagement.admin
                     string path = Path.Combine(appPath + "\\images\\" + dto.imageName);
                     FileInfo fi = new FileInfo(filePath);
                     fi.CopyTo(path);
-                } else
+                }
+                else
                 {
                     dto.imageName = txtImage.Text;
                 }
@@ -414,7 +433,8 @@ namespace CarManagement.admin
                         MessageBox.Show("Successfully update car with an ID of: " + dto.carID, "Message");
                         filePath = "";
                         openFile.FileName = "";
-                        loadData();
+                        showImage(dto.imageName);
+                        loadData(false);
                     }
                     else
                     {
@@ -447,7 +467,7 @@ namespace CarManagement.admin
                     if (daoCus.addNewCustomer(dtoCus))
                     {
                         MessageBox.Show("Successfully add Customer with phone: " + dtoCus.phone, "Message");
-                        loadData();
+                        loadData(false);
                         refress();
                     }
                     else
@@ -488,7 +508,7 @@ namespace CarManagement.admin
                 {
                     string mess = (daoCus.deleteCustomer(txtPhone.Text) == true) ? "Sucessfull !" : "Fail !";
                     MessageBox.Show("Delete Customer " + txtPhone.Text + " is " + mess + " !", "Delete Customer");
-                    loadData();
+                    loadData(false);
                     refress();
 
                 }
@@ -553,6 +573,53 @@ namespace CarManagement.admin
         private void Admin_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAddInvoice_Click(object sender, EventArgs e)
+        {
+            InsertInvoice form = new InsertInvoice(lbID.Text);
+            form.Show();
+        }
+
+        
+
+        private void setCombobox()
+        {
+            cbSale.Items.Add("Not sold yet");
+            cbSale.Items.Add("Sold");
+            cbSale.SelectedIndex = 0;
+        }
+
+        private void tbCar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbSale_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbSale.GetItemText(cbSale.SelectedItem).Equals("Not sold yet"))
+            {
+                loadData(false);
+                openFile.FileName = "";
+                pictureBoxCar.Image = null;
+                filePath = "";
+                refress();
+                btnAdd.Enabled = true;
+                btnRefresh.Enabled = true;
+            }
+            else
+            {
+                loadData(true);
+                openFile.FileName = "";
+                pictureBoxCar.Image = null;
+                filePath = "";
+                refress();
+                btnAdd.Enabled = false;
+                btnChooseImage.Enabled = false;
+                btnDelete.Enabled = false;
+                btnUpdate.Enabled = false;
+                btnRefresh.Enabled = false;
+            }
         }
     }
 }

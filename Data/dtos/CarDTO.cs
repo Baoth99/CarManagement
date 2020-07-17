@@ -18,6 +18,6 @@ namespace Data.dtos
         public float price { get; set; }
         public bool status { get; set; }
         public string imageName { get; set; }
-
+        public bool sale { get; set; }
     }
 }

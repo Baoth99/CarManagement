@@ -20,9 +20,16 @@ namespace CarManagement.admin
         CarDAO carDao = new CarDAO();
         CarDTO dto = null;
         string[] getTextBox = null;
+        private string _id;
         public InsertInvoice()
         {
             InitializeComponent();
+        }
+
+        public InsertInvoice(string id) : this()
+        {
+            _id = id;
+            lbEmpID.Text = _id;
         }
 
         private void InsertInvoice_Load(object sender, EventArgs e)
@@ -51,7 +58,7 @@ namespace CarManagement.admin
         {
             if (checkInfo())
             {
-                if (dto.status == true)
+                if (dto.sale == true)
                 {
                     MessageBox.Show("Car " + dto.carID + " has been sold, " + "Please choose anorder car !");
                     return;
@@ -60,17 +67,20 @@ namespace CarManagement.admin
                 {
                     try
                     {
-                        InvoiceDTO dto = new InvoiceDTO()
+                        InvoiceDTO invoiceDTO = new InvoiceDTO()
                         {
                             carID = lbCarID.Text,
                             phone = lbCusPhone.Text,
-                            id = "EMP001"
+                            id = _id
 
                         };
-                        if (inDao.addNewInvoice(dto))
+                        if (inDao.addNewInvoice(invoiceDTO))
                         {
                             MessageBox.Show("Invoice was created successfully !", "Successful");
-                            //this.Close();
+                            if (carDao.updateSaleCar(lbCarID.Text))
+                            {
+                                this.Close();
+                            }
                         }
                         else
                         {
@@ -169,6 +179,11 @@ namespace CarManagement.admin
                 return false;
             }
             return true;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

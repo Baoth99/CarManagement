@@ -23,8 +23,8 @@ namespace Data.daos
                 cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "checkLogin";
-                cmd.Parameters.Add("@UserName", SqlDbType.NVarChar).Value = userName.Trim();
-                cmd.Parameters.Add("@Password", SqlDbType.NVarChar).Value = password.Trim();
+                cmd.Parameters.Add("@UserName", SqlDbType.NVarChar).Value = userName;
+                cmd.Parameters.Add("@Password", SqlDbType.NVarChar).Value = password;
                 cmd.Connection = conn;
                 if (conn.State == ConnectionState.Closed)
                 {

@@ -27,7 +27,7 @@ namespace CarManagement.staff
         {
             InitializeComponent();
             data = new LoginSuccessfull(ReceiveData);
-            loadData();
+            loadData(false);
         }
         public void Login()
         {
@@ -40,10 +40,10 @@ namespace CarManagement.staff
             lbName.Text = dto.fullName;
         }
 
-        private void loadData()
+        private void loadData(bool sold)
         {
             dgvCar.DataSource = null;
-            dtCar = dao.getCarList();
+            dtCar = dao.getCarList(sold);
             dgvCar.DataSource = dtCar;
             dgvCar.Columns["ImagesName"].Visible = false;
             dgvCar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -91,7 +91,7 @@ namespace CarManagement.staff
                         fi.CopyTo(path);
                         MessageBox.Show("Successfully insert car with an ID of: " + dto.carID, "Message");
                         filePath = "";
-                        loadData();
+                        loadData(false);
                         refress();
                     }
                     else

@@ -77,19 +77,19 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.btnDetail = new System.Windows.Forms.Button();
             this.pictureBoxCar = new System.Windows.Forms.PictureBox();
             this.txtSearchCar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvCar = new System.Windows.Forms.DataGridView();
             this.tpInvoice = new System.Windows.Forms.TabPage();
+            this.btnAddInvoice = new System.Windows.Forms.Button();
+            this.dgvManageInvoice = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbName = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.openFile = new System.Windows.Forms.OpenFileDialog();
-            this.dgvManageInvoice = new System.Windows.Forms.DataGridView();
-            this.btnAddInvoice = new System.Windows.Forms.Button();
+            this.cbSale = new System.Windows.Forms.ComboBox();
             this.tcAdmin.SuspendLayout();
             this.tbCustomer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomer)).BeginInit();
@@ -100,8 +100,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCar)).BeginInit();
             this.tpInvoice.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvManageInvoice)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbID
@@ -118,7 +118,7 @@
             // btnLogout
             // 
             this.btnLogout.Location = new System.Drawing.Point(535, 25);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(4);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(157, 39);
             this.btnLogout.TabIndex = 1;
@@ -133,7 +133,7 @@
             this.tcAdmin.Controls.Add(this.tbCar);
             this.tcAdmin.Controls.Add(this.tpInvoice);
             this.tcAdmin.Location = new System.Drawing.Point(45, 87);
-            this.tcAdmin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tcAdmin.Margin = new System.Windows.Forms.Padding(4);
             this.tcAdmin.Name = "tcAdmin";
             this.tcAdmin.SelectedIndex = 0;
             this.tcAdmin.Size = new System.Drawing.Size(1520, 657);
@@ -145,9 +145,9 @@
             this.tbCustomer.Controls.Add(this.dgvCustomer);
             this.tbCustomer.Controls.Add(this.panel3);
             this.tbCustomer.Location = new System.Drawing.Point(4, 25);
-            this.tbCustomer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.tbCustomer.Name = "tbCustomer";
-            this.tbCustomer.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbCustomer.Padding = new System.Windows.Forms.Padding(4);
             this.tbCustomer.Size = new System.Drawing.Size(1512, 628);
             this.tbCustomer.TabIndex = 2;
             this.tbCustomer.Text = "Customer";
@@ -156,7 +156,7 @@
             // pictureBoxCustomer
             // 
             this.pictureBoxCustomer.Location = new System.Drawing.Point(1096, 212);
-            this.pictureBoxCustomer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBoxCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxCustomer.Name = "pictureBoxCustomer";
             this.pictureBoxCustomer.Size = new System.Drawing.Size(383, 366);
             this.pictureBoxCustomer.TabIndex = 17;
@@ -169,7 +169,7 @@
             this.dgvCustomer.AllowUserToResizeRows = false;
             this.dgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCustomer.Location = new System.Drawing.Point(23, 212);
-            this.dgvCustomer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.dgvCustomer.Name = "dgvCustomer";
             this.dgvCustomer.ReadOnly = true;
             this.dgvCustomer.RowHeadersWidth = 51;
@@ -202,7 +202,7 @@
             // btnRefreshCus
             // 
             this.btnRefreshCus.Location = new System.Drawing.Point(1263, 78);
-            this.btnRefreshCus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRefreshCus.Margin = new System.Windows.Forms.Padding(4);
             this.btnRefreshCus.Name = "btnRefreshCus";
             this.btnRefreshCus.Size = new System.Drawing.Size(187, 52);
             this.btnRefreshCus.TabIndex = 28;
@@ -221,7 +221,7 @@
             // txtSearchCustomer
             // 
             this.txtSearchCustomer.Location = new System.Drawing.Point(268, 107);
-            this.txtSearchCustomer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSearchCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearchCustomer.Name = "txtSearchCustomer";
             this.txtSearchCustomer.Size = new System.Drawing.Size(543, 22);
             this.txtSearchCustomer.TabIndex = 7;
@@ -240,7 +240,7 @@
             // btnUpdateCus
             // 
             this.btnUpdateCus.Location = new System.Drawing.Point(1263, 10);
-            this.btnUpdateCus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUpdateCus.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdateCus.Name = "btnUpdateCus";
             this.btnUpdateCus.Size = new System.Drawing.Size(187, 53);
             this.btnUpdateCus.TabIndex = 9;
@@ -251,7 +251,7 @@
             // btnDeleteCus
             // 
             this.btnDeleteCus.Location = new System.Drawing.Point(1064, 75);
-            this.btnDeleteCus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDeleteCus.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteCus.Name = "btnDeleteCus";
             this.btnDeleteCus.Size = new System.Drawing.Size(187, 52);
             this.btnDeleteCus.TabIndex = 10;
@@ -262,7 +262,7 @@
             // btnAddCus
             // 
             this.btnAddCus.Location = new System.Drawing.Point(1064, 10);
-            this.btnAddCus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddCus.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddCus.Name = "btnAddCus";
             this.btnAddCus.Size = new System.Drawing.Size(187, 48);
             this.btnAddCus.TabIndex = 8;
@@ -333,9 +333,9 @@
             // tpEmployee
             // 
             this.tpEmployee.Location = new System.Drawing.Point(4, 25);
-            this.tpEmployee.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpEmployee.Margin = new System.Windows.Forms.Padding(4);
             this.tpEmployee.Name = "tpEmployee";
-            this.tpEmployee.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpEmployee.Padding = new System.Windows.Forms.Padding(4);
             this.tpEmployee.Size = new System.Drawing.Size(1512, 628);
             this.tpEmployee.TabIndex = 0;
             this.tpEmployee.Text = "Employee";
@@ -343,25 +343,26 @@
             // 
             // tbCar
             // 
+            this.tbCar.Controls.Add(this.cbSale);
             this.tbCar.Controls.Add(this.btnRefresh);
             this.tbCar.Controls.Add(this.panel2);
-            this.tbCar.Controls.Add(this.btnDetail);
             this.tbCar.Controls.Add(this.pictureBoxCar);
             this.tbCar.Controls.Add(this.txtSearchCar);
             this.tbCar.Controls.Add(this.label1);
             this.tbCar.Controls.Add(this.dgvCar);
             this.tbCar.Location = new System.Drawing.Point(4, 25);
-            this.tbCar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbCar.Margin = new System.Windows.Forms.Padding(4);
             this.tbCar.Name = "tbCar";
-            this.tbCar.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbCar.Padding = new System.Windows.Forms.Padding(4);
             this.tbCar.Size = new System.Drawing.Size(1512, 628);
             this.tbCar.TabIndex = 1;
             this.tbCar.Text = "Car";
             this.tbCar.UseVisualStyleBackColor = true;
+            this.tbCar.Click += new System.EventHandler(this.tbCar_Click);
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(1096, 175);
+            this.btnRefresh.Location = new System.Drawing.Point(1202, 175);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(183, 47);
@@ -416,7 +417,7 @@
             // btnUpdate
             // 
             this.btnUpdate.Location = new System.Drawing.Point(1064, 78);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(187, 53);
             this.btnUpdate.TabIndex = 27;
@@ -427,7 +428,7 @@
             // btnDelete
             // 
             this.btnDelete.Location = new System.Drawing.Point(1263, 78);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(187, 52);
             this.btnDelete.TabIndex = 28;
@@ -460,15 +461,15 @@
             this.cbStatus.Location = new System.Drawing.Point(723, 117);
             this.cbStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbStatus.Name = "cbStatus";
-            this.cbStatus.Size = new System.Drawing.Size(53, 21);
+            this.cbStatus.Size = new System.Drawing.Size(57, 21);
             this.cbStatus.TabIndex = 23;
-            this.cbStatus.Text = "Sell";
+            this.cbStatus.Text = "New";
             this.cbStatus.UseVisualStyleBackColor = true;
             // 
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(1263, 12);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(187, 48);
             this.btnAdd.TabIndex = 26;
@@ -621,20 +622,10 @@
             this.txtName.Size = new System.Drawing.Size(216, 22);
             this.txtName.TabIndex = 16;
             // 
-            // btnDetail
-            // 
-            this.btnDetail.Location = new System.Drawing.Point(1308, 175);
-            this.btnDetail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnDetail.Name = "btnDetail";
-            this.btnDetail.Size = new System.Drawing.Size(171, 48);
-            this.btnDetail.TabIndex = 30;
-            this.btnDetail.Text = "Detail";
-            this.btnDetail.UseVisualStyleBackColor = true;
-            // 
             // pictureBoxCar
             // 
             this.pictureBoxCar.Location = new System.Drawing.Point(1096, 239);
-            this.pictureBoxCar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBoxCar.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxCar.Name = "pictureBoxCar";
             this.pictureBoxCar.Size = new System.Drawing.Size(383, 366);
             this.pictureBoxCar.TabIndex = 3;
@@ -642,8 +633,8 @@
             // 
             // txtSearchCar
             // 
-            this.txtSearchCar.Location = new System.Drawing.Point(100, 188);
-            this.txtSearchCar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSearchCar.Location = new System.Drawing.Point(426, 188);
+            this.txtSearchCar.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearchCar.Name = "txtSearchCar";
             this.txtSearchCar.Size = new System.Drawing.Size(543, 22);
             this.txtSearchCar.TabIndex = 31;
@@ -652,12 +643,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 188);
+            this.label1.Location = new System.Drawing.Point(286, 191);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 17);
+            this.label1.Size = new System.Drawing.Size(117, 17);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Search:";
+            this.label1.Text = "Search by Name:";
             // 
             // dgvCar
             // 
@@ -665,7 +656,7 @@
             this.dgvCar.AllowUserToDeleteRows = false;
             this.dgvCar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCar.Location = new System.Drawing.Point(23, 239);
-            this.dgvCar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvCar.Margin = new System.Windows.Forms.Padding(4);
             this.dgvCar.Name = "dgvCar";
             this.dgvCar.ReadOnly = true;
             this.dgvCar.RowHeadersWidth = 51;
@@ -678,13 +669,33 @@
             this.tpInvoice.Controls.Add(this.btnAddInvoice);
             this.tpInvoice.Controls.Add(this.dgvManageInvoice);
             this.tpInvoice.Location = new System.Drawing.Point(4, 25);
-            this.tpInvoice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpInvoice.Margin = new System.Windows.Forms.Padding(4);
             this.tpInvoice.Name = "tpInvoice";
-            this.tpInvoice.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpInvoice.Padding = new System.Windows.Forms.Padding(4);
             this.tpInvoice.Size = new System.Drawing.Size(1512, 628);
             this.tpInvoice.TabIndex = 3;
             this.tpInvoice.Text = "Manage Invoice";
             this.tpInvoice.UseVisualStyleBackColor = true;
+            // 
+            // btnAddInvoice
+            // 
+            this.btnAddInvoice.Location = new System.Drawing.Point(22, 60);
+            this.btnAddInvoice.Name = "btnAddInvoice";
+            this.btnAddInvoice.Size = new System.Drawing.Size(184, 52);
+            this.btnAddInvoice.TabIndex = 1;
+            this.btnAddInvoice.Text = "Add Invoice";
+            this.btnAddInvoice.UseVisualStyleBackColor = true;
+            this.btnAddInvoice.Click += new System.EventHandler(this.btnAddInvoice_Click);
+            // 
+            // dgvManageInvoice
+            // 
+            this.dgvManageInvoice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvManageInvoice.Location = new System.Drawing.Point(22, 170);
+            this.dgvManageInvoice.Name = "dgvManageInvoice";
+            this.dgvManageInvoice.RowHeadersWidth = 51;
+            this.dgvManageInvoice.RowTemplate.Height = 24;
+            this.dgvManageInvoice.Size = new System.Drawing.Size(862, 431);
+            this.dgvManageInvoice.TabIndex = 0;
             // 
             // panel1
             // 
@@ -694,7 +705,7 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.lbID);
             this.panel1.Location = new System.Drawing.Point(49, 14);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(447, 52);
             this.panel1.TabIndex = 5;
@@ -732,24 +743,14 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "ID: ";
             // 
-            // dgvManageInvoice
+            // cbSale
             // 
-            this.dgvManageInvoice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvManageInvoice.Location = new System.Drawing.Point(22, 170);
-            this.dgvManageInvoice.Name = "dgvManageInvoice";
-            this.dgvManageInvoice.RowHeadersWidth = 51;
-            this.dgvManageInvoice.RowTemplate.Height = 24;
-            this.dgvManageInvoice.Size = new System.Drawing.Size(862, 431);
-            this.dgvManageInvoice.TabIndex = 0;
-            // 
-            // btnAddInvoice
-            // 
-            this.btnAddInvoice.Location = new System.Drawing.Point(22, 60);
-            this.btnAddInvoice.Name = "btnAddInvoice";
-            this.btnAddInvoice.Size = new System.Drawing.Size(184, 52);
-            this.btnAddInvoice.TabIndex = 1;
-            this.btnAddInvoice.Text = "Add Invoice";
-            this.btnAddInvoice.UseVisualStyleBackColor = true;
+            this.cbSale.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSale.Location = new System.Drawing.Point(24, 187);
+            this.cbSale.Name = "cbSale";
+            this.cbSale.Size = new System.Drawing.Size(236, 24);
+            this.cbSale.TabIndex = 32;
+            this.cbSale.SelectedIndexChanged += new System.EventHandler(this.cbSale_SelectedIndexChanged);
             // 
             // Admin
             // 
@@ -759,11 +760,10 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tcAdmin);
             this.Controls.Add(this.btnLogout);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Admin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Admin";
-            this.Load += new System.EventHandler(this.Admin_Load);
             this.tcAdmin.ResumeLayout(false);
             this.tbCustomer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomer)).EndInit();
@@ -777,9 +777,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCar)).EndInit();
             this.tpInvoice.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvManageInvoice)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvManageInvoice)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -803,7 +803,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnDetail;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.CheckBox cbStatus;
         private System.Windows.Forms.Label label12;
@@ -847,5 +846,6 @@
         private System.Windows.Forms.Button btnRefreshCus;
         private System.Windows.Forms.Button btnAddInvoice;
         private System.Windows.Forms.DataGridView dgvManageInvoice;
+        private System.Windows.Forms.ComboBox cbSale;
     }
 }

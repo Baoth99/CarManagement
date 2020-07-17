@@ -12,7 +12,7 @@ namespace Data.daos
 {
     public class CarDAO
     {
-        public DataTable getCarList()
+        public DataTable getCarList(bool sold)
         {
             SqlConnection conn = null;
             SqlCommand cmd = null;
@@ -24,6 +24,7 @@ namespace Data.daos
                 cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "getCarList";
+                cmd.Parameters.Add("@sold", SqlDbType.Bit).Value = sold;
                 cmd.Connection = conn;
                 da = new SqlDataAdapter(cmd);
                 if (conn.State == ConnectionState.Closed)
@@ -311,6 +312,7 @@ namespace Data.daos
                             dto.model = reader.GetString(4);
                             dto.price = (float)reader.GetDouble(5);
                             dto.status = reader.GetBoolean(6);
+                            dto.sale = reader.GetBoolean(7);
                         }
                     }
                 }
@@ -333,6 +335,44 @@ namespace Data.daos
                 }
             }
             return dto;
+        }
+
+        public bool updateSaleCar(string id)
+        {
+            SqlConnection conn = null;
+            SqlCommand cmd = null;
+            bool result = false;
+            try
+            {
+                conn = utils.DBConnection.GetConnection();
+                cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "updateSale";
+                cmd.Parameters.Add("@carID", SqlDbType.NVarChar).Value = id;
+                cmd.Connection = conn;
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                result = (cmd.ExecuteNonQuery() < 0);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (cmd != null)
+                {
+                    cmd.Cancel();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
+            }
+            return result;
         }
     }
 } 
