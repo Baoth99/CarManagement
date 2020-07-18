@@ -21,15 +21,17 @@ namespace CarManagement.admin
         CarDTO dto = null;
         string[] getTextBox = null;
         private string _id;
+        private DataGridView _table;
         public InsertInvoice()
         {
             InitializeComponent();
         }
 
-        public InsertInvoice(string id) : this()
+        public InsertInvoice(string id, DataGridView table) : this()
         {
             _id = id;
             lbEmpID.Text = _id;
+            _table = table;
         }
 
         private void InsertInvoice_Load(object sender, EventArgs e)
@@ -58,13 +60,6 @@ namespace CarManagement.admin
         {
             if (checkInfo())
             {
-                if (dto.sale == true)
-                {
-                    MessageBox.Show("Car " + dto.carID + " has been sold, " + "Please choose anorder car !");
-                    return;
-                }
-                else
-                {
                     try
                     {
                         InvoiceDTO invoiceDTO = new InvoiceDTO()
@@ -79,7 +74,11 @@ namespace CarManagement.admin
                             MessageBox.Show("Invoice was created successfully !", "Successful");
                             if (carDao.updateSaleCar(lbCarID.Text))
                             {
-                                this.Close();
+                            _table.DataSource = null;
+                            DataTable dtInvoice = inDao.getInvoiceList();
+                            _table.DataSource = dtInvoice;
+                            _table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                            this.Close();
                             }
                         }
                         else
@@ -92,7 +91,6 @@ namespace CarManagement.admin
 
                         throw;
                     }
-                }
             }
             
         }

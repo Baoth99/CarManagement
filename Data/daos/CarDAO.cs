@@ -312,7 +312,6 @@ namespace Data.daos
                             dto.model = reader.GetString(4);
                             dto.price = (float)reader.GetDouble(5);
                             dto.status = reader.GetBoolean(6);
-                            dto.sale = reader.GetBoolean(7);
                         }
                     }
                 }

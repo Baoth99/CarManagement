@@ -25,8 +25,10 @@ namespace CarManagement.admin
         public LoginSuccessfull data;
         readonly CarDAO dao = new CarDAO();
         readonly CustomerDAO daoCus = new CustomerDAO();
+        readonly InvoiceDAO daoInv = new InvoiceDAO();
         DataTable dtCar;
         DataTable dtCustomer;
+        DataTable dtInvoice;
         string filePath = "";
         public Admin()
         {
@@ -54,10 +56,15 @@ namespace CarManagement.admin
             dgvCar.DataSource = dtCar;
             dgvCar.Columns["ImagesName"].Visible = false;
             dgvCar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            ///
             dtCustomer = daoCus.getCustomerList();
             dgvCustomer.DataSource = dtCustomer;
             dgvCustomer.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
+            ///
+            dgvManageInvoice.DataSource = null;
+            dtInvoice = daoInv.getInvoiceList();
+            dgvManageInvoice.DataSource = dtInvoice;
+            dgvManageInvoice.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -294,6 +301,9 @@ namespace CarManagement.admin
             txtCustomerName.Text = "";
             txtEmail.Text = "";
             txtAddress.Text = "";
+            btnUpdateCus.Enabled = false;
+            btnDeleteCus.Enabled = false;
+            btnAddCus.Enabled = true;
 
         }
 
@@ -490,6 +500,7 @@ namespace CarManagement.admin
         {
             refress();
             databindings_clear_Customer();
+            
         }
 
         private void btnDeleteCus_Click(object sender, EventArgs e)
@@ -542,6 +553,9 @@ namespace CarManagement.admin
             {
                 databindings_clear_Customer();
                 showTextBox_Customer();
+                btnAddCus.Enabled = false;
+                btnDeleteCus.Enabled = true;
+                btnUpdateCus.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -577,7 +591,7 @@ namespace CarManagement.admin
 
         private void btnAddInvoice_Click(object sender, EventArgs e)
         {
-            InsertInvoice form = new InsertInvoice(lbID.Text);
+            InsertInvoice form = new InsertInvoice(lbID.Text, dgvManageInvoice);
             form.Show();
         }
 
@@ -620,6 +634,99 @@ namespace CarManagement.admin
                 btnUpdate.Enabled = false;
                 btnRefresh.Enabled = false;
             }
+        }
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void dgvManageInvoice_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (dgvManageInvoice.RowCount == 0)
+                {
+                    return;
+                }
+                else
+                {
+                    DataGridViewRow row = dgvManageInvoice.Rows[e.RowIndex];
+                    InvoiceDTO dto = new InvoiceDTO()
+                    {
+                        invoiceID = row.Cells[0].Value.ToString(),
+                        carID = row.Cells[1].Value.ToString(),
+                        phone = row.Cells[2].Value.ToString(),
+                        dateSell = row.Cells[3].Value.ToString(),
+                        id = row.Cells[4].Value.ToString(),
+                    };
+                    string[] obj = getInfoInvoice(dto);
+                    if (obj != null)
+                    {
+                        lbInvoiceID.Text = dto.invoiceID;
+                        lbCusName.Text = obj[4];
+                        lbPhone.Text = dto.phone;
+                        lbAddress.Text = obj[6];
+                        lbEmail.Text = obj[5];
+                        lbCarID.Text = dto.carID;
+                        lbCarName.Text = obj[0];
+                        lbCarType.Text = obj[1];
+                        lbBrand.Text = obj[2];
+                        lbPrice.Text = obj[3].ToString();
+                        lbEmpID.Text = dto.id;
+                        lbEmpName.Text = obj[7];
+                        lbDate.Text = dto.dateSell;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                return;
+            }
+        }
+
+
+        private string[] getInfoInvoice(InvoiceDTO dto)
+        {
+            string[] obj = null;
+            try
+            {
+                obj = daoInv.getInvoiceInfo(dto);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return obj;            
+        }
+
+        private void txtSearchInvoice_TextChanged(object sender, EventArgs e)
+        {
+            invoiceEmpty();
+            DataView dv = dtInvoice.DefaultView;
+            string filter = "invoiceID like '%" + txtSearchInvoice.Text + "%'";
+            dv.RowFilter = filter;
+        }
+
+        private void invoiceEmpty()
+        {
+            lbInvoiceID.Text = "";
+            lbCusName.Text = "";
+            lbPhone.Text = "";
+            lbAddress.Text = "";
+            lbEmail.Text = "";
+            lbCarID.Text = "";
+            lbCarName.Text = "";
+            lbCarType.Text = "";
+            lbBrand.Text = "";
+            lbPrice.Text = "";
+            lbEmpID.Text = "";
+            lbEmpName.Text = "";
+            lbDate.Text = "";
+        }
+
+        private void btnRefressInvoice_Click(object sender, EventArgs e)
+        {
+            invoiceEmpty();
         }
     }
 }
