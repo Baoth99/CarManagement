@@ -199,7 +199,7 @@ namespace CarManagement.admin
 
             return true;
         }//end checkField
-        private bool checkFiledCustomer()
+        private bool checkFiledCustomer(string action)
         {
             if (!Check.getString(txtPhone.Text))
             {
@@ -213,9 +213,12 @@ namespace CarManagement.admin
                     "and contain numeric characters only (0 – 9)", "Error");
                 return false;
             }
-            if (!daoCus.checkPhoneDulicate(txtPhone.Text))
+            if (action.Equals("INSERT"))
             {
-                MessageBox.Show("Phone number is duplicate!", "Error");
+                if (!daoCus.checkPhoneDulicate(txtPhone.Text))
+                {
+                    MessageBox.Show("Phone number is duplicate!", "Error");
+                }
             }
             if (!Check.getString(txtCustomerName.Text))
             {
@@ -302,7 +305,6 @@ namespace CarManagement.admin
             txtEmail.Text = "";
             txtAddress.Text = "";
             btnUpdateCus.Enabled = false;
-            btnDeleteCus.Enabled = false;
             btnAddCus.Enabled = true;
 
         }
@@ -462,7 +464,7 @@ namespace CarManagement.admin
         //Customer
         private void btnAddCus_Click(object sender, EventArgs e)
         {
-            bool check = checkFiledCustomer();
+            bool check = checkFiledCustomer("INSERT");
             if (check)
             {
                 CustomerDTO dtoCus = new CustomerDTO()
@@ -503,32 +505,7 @@ namespace CarManagement.admin
             
         }
 
-        private void btnDeleteCus_Click(object sender, EventArgs e)
-        {
-            if (!Check.getString(txtPhone.Text))
-            {
-                MessageBox.Show("Please choose Customer that you want to delete!", "Error");
-                txtPhone.Focus();
-                return;
-            }
-            try
-            {
-                MessageBoxButtons button = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show("Do you want to delete Customer " + txtPhone.Text + " ? ", "Delete Customer", button);
-                if (result.Equals(DialogResult.Yes))
-                {
-                    string mess = (daoCus.deleteCustomer(txtPhone.Text) == true) ? "Sucessfull !" : "Fail !";
-                    MessageBox.Show("Delete Customer " + txtPhone.Text + " is " + mess + " !", "Delete Customer");
-                    loadData(false);
-                    refress();
-
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }//end Delete Customer
+        //end Delete Customer
 
         private void databindings_clear_Customer()
         {
@@ -554,7 +531,6 @@ namespace CarManagement.admin
                 databindings_clear_Customer();
                 showTextBox_Customer();
                 btnAddCus.Enabled = false;
-                btnDeleteCus.Enabled = true;
                 btnUpdateCus.Enabled = true;
             }
             catch (Exception ex)
@@ -565,7 +541,40 @@ namespace CarManagement.admin
 
         private void btnUpdateCus_Click(object sender, EventArgs e)
         {
-
+            CustomerDTO dtoCus = null;
+            bool check = checkFiledCustomer("UPDATE");
+            if (check)
+            {
+                dtoCus = new CustomerDTO()
+                {
+                    phone = txtPhone.Text,
+                    customerName = txtCustomerName.Text,
+                    email = txtEmail.Text,
+                    address = txtAddress.Text
+                };
+                if (!Check.getString(txtPhone.Text))
+                {
+                    MessageBox.Show("Please choose Customer that you want to Update!", "Error");
+                    txtPhone.Focus();
+                    return;
+                }
+                try
+                {
+                    if (daoCus.updateCustomer(dtoCus))
+                    {
+                        MessageBox.Show("Successfully update customer with phone of: " + dtoCus.phone, "Message");
+                        loadData(false);
+                    }
+                    else
+                    {
+                        MessageBox.Show("UnSuccessfully update Customer", "Message");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
         }
 
         private void txtSearchCar_TextChanged(object sender, EventArgs e)

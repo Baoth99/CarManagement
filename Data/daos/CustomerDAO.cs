@@ -115,7 +115,7 @@ namespace Data.daos
                 cmd.Parameters.Add("@Phone", SqlDbType.Char).Value = newCustomer.phone;
                 cmd.Parameters.Add("@CustomerName", SqlDbType.NVarChar).Value = newCustomer.customerName; ;
                 cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = newCustomer.email;
-                cmd.Parameters.Add("@Address", SqlDbType.NVarChar).Value = newCustomer.address;               
+                cmd.Parameters.Add("@Address", SqlDbType.NVarChar).Value = newCustomer.address;
                 cmd.Connection = conn;
                 if (conn.State == ConnectionState.Closed)
                 {
@@ -141,43 +141,7 @@ namespace Data.daos
             }
             return result;
         }//end AddCustomer
-        public bool deleteCustomer(string phone)
-        {
-            SqlConnection conn = null;
-            SqlCommand cmd = null;
-            bool result = false;
-            try
-            {
-                conn = utils.DBConnection.GetConnection();
-                cmd = new SqlCommand();
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "deleteCustomer";
-                cmd.Parameters.Add("@Phone", SqlDbType.Char).Value = phone;
-                cmd.Connection = conn;
-                if (conn.State == ConnectionState.Closed)
-                {
-                    conn.Open();
-                }
-                result = (cmd.ExecuteNonQuery() < 0);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                if (cmd != null)
-                {
-                    cmd.Cancel();
-                }
-                if (conn != null)
-                {
-                    conn.Close();
-                    conn.Dispose();
-                }
-            }
-            return result;
-        }//end delete Customer
+        //end delete Customer
 
         public AutoCompleteStringCollection getCutomerName()
         {
@@ -197,7 +161,7 @@ namespace Data.daos
                     conn.Open();
                     reader = cmd.ExecuteReader();
                     if (reader.HasRows)
-                    { 
+                    {
                         while (reader.Read())
                         {
                             listName.Add(reader.GetString(0) + "-" + reader.GetString(1));
@@ -276,6 +240,48 @@ namespace Data.daos
             }
             return dto;
         }
+
+
+        public bool updateCustomer(CustomerDTO customer)
+        {
+            SqlConnection conn = null;
+            SqlCommand cmd = null;
+            bool result = false;
+            try
+            {
+                conn = utils.DBConnection.GetConnection();
+                cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "updateCustomer";
+                cmd.Parameters.Add("@customerName", SqlDbType.NVarChar).Value = customer.customerName;
+                cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = customer.email;
+                cmd.Parameters.Add("@address", SqlDbType.VarChar).Value = customer.address;
+                cmd.Parameters.Add("@phone", SqlDbType.Char).Value = customer.phone;
+                cmd.Connection = conn;
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                result = (cmd.ExecuteNonQuery() > 0);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (cmd != null)
+                {
+                    cmd.Cancel();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
+            }
+            return result;
+        }//end update Customer
 
     }//end customerDAO
 }

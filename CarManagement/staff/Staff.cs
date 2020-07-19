@@ -298,7 +298,6 @@ namespace CarManagement.staff
             txtEmail.Text = "";
             txtAddress.Text = "";
             btnUpdateCus.Enabled = false;
-            btnDeleteCus.Enabled = false;
             btnAddCus.Enabled = true;
         }
 
@@ -496,32 +495,6 @@ namespace CarManagement.staff
             databindings_clear_Customer();
         }
 
-        private void btnDeleteCus_Click(object sender, EventArgs e)
-        {
-            if (!Check.getString(txtPhone.Text))
-            {
-                MessageBox.Show("Please choose Customer that you want to delete!", "Error");
-                txtPhone.Focus();
-                return;
-            }
-            try
-            {
-                MessageBoxButtons button = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show("Do you want to delete Customer " + txtPhone.Text + " ? ", "Delete Customer", button);
-                if (result.Equals(DialogResult.Yes))
-                {
-                    string mess = (daoCus.deleteCustomer(txtPhone.Text) == true) ? "Sucessfull !" : "Fail !";
-                    MessageBox.Show("Delete Customer " + txtPhone.Text + " is " + mess + " !", "Delete Customer");
-                    loadData(false);
-                    refress();
-
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
 
         private void databindings_clear_Customer()
         {
@@ -547,7 +520,6 @@ namespace CarManagement.staff
                 databindings_clear_Customer();
                 showTextBox_Customer();
                 btnAddCus.Enabled = false;
-                btnDeleteCus.Enabled = true;
                 btnUpdateCus.Enabled = true;
             }
             catch (Exception ex)

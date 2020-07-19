@@ -39,7 +39,6 @@
             this.txtSearchCustomer = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.btnUpdateCus = new System.Windows.Forms.Button();
-            this.btnDeleteCus = new System.Windows.Forms.Button();
             this.btnAddCus = new System.Windows.Forms.Button();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -198,7 +197,6 @@
             this.panel3.Controls.Add(this.txtSearchCustomer);
             this.panel3.Controls.Add(this.label15);
             this.panel3.Controls.Add(this.btnUpdateCus);
-            this.panel3.Controls.Add(this.btnDeleteCus);
             this.panel3.Controls.Add(this.btnAddCus);
             this.panel3.Controls.Add(this.txtAddress);
             this.panel3.Controls.Add(this.label17);
@@ -215,7 +213,7 @@
             // 
             // btnRefreshCus
             // 
-            this.btnRefreshCus.Location = new System.Drawing.Point(947, 63);
+            this.btnRefreshCus.Location = new System.Drawing.Point(869, 65);
             this.btnRefreshCus.Name = "btnRefreshCus";
             this.btnRefreshCus.Size = new System.Drawing.Size(140, 42);
             this.btnRefreshCus.TabIndex = 28;
@@ -258,21 +256,11 @@
             this.btnUpdateCus.UseVisualStyleBackColor = true;
             this.btnUpdateCus.Click += new System.EventHandler(this.btnUpdateCus_Click);
             // 
-            // btnDeleteCus
-            // 
-            this.btnDeleteCus.Location = new System.Drawing.Point(798, 61);
-            this.btnDeleteCus.Name = "btnDeleteCus";
-            this.btnDeleteCus.Size = new System.Drawing.Size(140, 42);
-            this.btnDeleteCus.TabIndex = 10;
-            this.btnDeleteCus.Text = "Delete";
-            this.btnDeleteCus.UseVisualStyleBackColor = true;
-            this.btnDeleteCus.Click += new System.EventHandler(this.btnDeleteCus_Click);
-            // 
             // btnAddCus
             // 
             this.btnAddCus.Location = new System.Drawing.Point(798, 8);
             this.btnAddCus.Name = "btnAddCus";
-            this.btnAddCus.Size = new System.Drawing.Size(140, 39);
+            this.btnAddCus.Size = new System.Drawing.Size(140, 43);
             this.btnAddCus.TabIndex = 8;
             this.btnAddCus.Text = "Add New Customer";
             this.btnAddCus.UseVisualStyleBackColor = true;
@@ -1146,7 +1134,6 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnUpdateCus;
-        private System.Windows.Forms.Button btnDeleteCus;
         private System.Windows.Forms.Button btnAddCus;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Label label17;
