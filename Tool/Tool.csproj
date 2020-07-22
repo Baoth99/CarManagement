@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="checkinput\Check.cs" />
-    <Compile Include="encrypt\Encryption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
