@@ -69,7 +69,7 @@ namespace CarManagement.admin
             dtInvoice = daoInv.getInvoiceList();
             dgvManageInvoice.DataSource = dtInvoice;
             dgvManageInvoice.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        }
+        } 
 
         private void loadDataEmp(bool role)
         {
