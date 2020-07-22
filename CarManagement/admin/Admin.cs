@@ -26,17 +26,21 @@ namespace CarManagement.admin
         readonly CarDAO dao = new CarDAO();
         readonly CustomerDAO daoCus = new CustomerDAO();
         readonly InvoiceDAO daoInv = new InvoiceDAO();
+        readonly EmployeeDAO daoEmp = new EmployeeDAO();
         DataTable dtCar;
         DataTable dtCustomer;
         DataTable dtInvoice;
+        DataTable dtEmp;
         string filePath = "";
         public Admin()
         {
             InitializeComponent();
             data = new LoginSuccessfull(ReceiveData);
             loadData(false);
+            loadDataEmp(false);
             refress();
             setCombobox();
+            setComboBoxEmp();
         }
 
         public void Login()
@@ -65,6 +69,15 @@ namespace CarManagement.admin
             dtInvoice = daoInv.getInvoiceList();
             dgvManageInvoice.DataSource = dtInvoice;
             dgvManageInvoice.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private void loadDataEmp(bool role)
+        {
+            dgvEmployee.DataSource = null;
+            dtEmp = daoEmp.getEmployeeList(role);
+            dgvEmployee.DataSource = dtEmp;
+            dgvEmployee.Columns["Role"].Visible = false;
+            dgvEmployee.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -307,12 +320,14 @@ namespace CarManagement.admin
             btnUpdateCus.Enabled = false;
             btnAddCus.Enabled = true;
 
+
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             refress();
             databindings_clear_Car();
+            loadData(false);
         }
 
         private void databindings_clear_Car()
@@ -502,7 +517,8 @@ namespace CarManagement.admin
         {
             refress();
             databindings_clear_Customer();
-            
+            loadData(false);
+
         }
 
         //end Delete Customer
@@ -604,7 +620,7 @@ namespace CarManagement.admin
             form.Show();
         }
 
-        
+
 
         private void setCombobox()
         {
@@ -705,7 +721,7 @@ namespace CarManagement.admin
             {
                 throw;
             }
-            return obj;            
+            return obj;
         }
 
         private void txtSearchInvoice_TextChanged(object sender, EventArgs e)
@@ -736,6 +752,233 @@ namespace CarManagement.admin
         private void btnRefressInvoice_Click(object sender, EventArgs e)
         {
             invoiceEmpty();
+            loadData(false);
+        }
+
+
+        private void setComboBoxEmp()
+        {
+            cbRole.Items.Add("Employee");
+            cbRole.Items.Add("Admin");
+            cbRole.SelectedIndex = 0;
+        }
+
+        private void employeeEmpty()
+        {
+            txtEmpID.Text = "";
+            txtEmpID.Enabled = true;
+            txtFullName.Text = "";
+            txtFullName.Enabled = true;
+            txtUserName.Text = "";
+            txtUserName.Enabled = true;
+            txtPassword.Text = "";
+            txtPassword.Enabled = true;
+
+            cbActive.Checked = false;
+            btnAddNewEmp.Enabled = true;
+            btnUpdateEmp.Enabled = false;
+        }
+
+        private void databindings_clear_Emp()
+        {
+            txtEmpID.DataBindings.Clear();
+            txtFullName.DataBindings.Clear();
+            txtUserName.DataBindings.Clear();
+            txtPassword.DataBindings.Clear();
+            cbActive.DataBindings.Clear();
+        }
+
+        private void showTextBoxEmp()
+        {
+            txtEmpID.Enabled = false;
+            txtUserName.Enabled = false;
+            txtPassword.Enabled = false;
+            txtEmpID.DataBindings.Add("Text", dtEmp, "ID");
+            txtFullName.DataBindings.Add("Text", dtEmp, "FullName");
+            txtUserName.DataBindings.Add("Text", dtEmp, "UserName");
+            cbActive.DataBindings.Add("Checked", dtEmp, "status");
+        }
+
+        private void dgvEmployee_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (dgvEmployee.RowCount == 0)
+                {
+                    return;
+                }
+                else
+                {
+                    databindings_clear_Emp();
+                    showTextBoxEmp();
+                    if (cbRole.GetItemText(cbRole.SelectedItem).Equals("Employee"))
+                    {
+                        btnUpdateEmp.Enabled = true;
+                        btnAddNewEmp.Enabled = false;
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+
+        private void cbRole_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbRole.GetItemText(cbRole.SelectedItem).Equals("Employee"))
+            {
+                loadDataEmp(false);
+                employeeEmpty();
+                btnAddNewEmp.Enabled = true;
+                btnRefressEmp.Enabled = true;
+                txtEmpID.Enabled = true;
+                txtFullName.Enabled = true;
+                txtUserName.Enabled = true;
+                txtPassword.Enabled = true;
+                cbActive.Enabled = true;
+            }
+            else
+            {
+                loadDataEmp(true);
+                employeeEmpty();
+                btnAddNewEmp.Enabled = false;
+                btnUpdateEmp.Enabled = false;
+                btnRefressEmp.Enabled = false;
+                txtEmpID.Enabled = false;
+                txtFullName.Enabled = false;
+                txtUserName.Enabled = false;
+                txtPassword.Enabled = false;
+                cbActive.Enabled = false;
+            }
+
+        }
+
+        private void btnRefressEmp_Click(object sender, EventArgs e)
+        {
+            employeeEmpty();
+            loadDataEmp(false);
+        }
+        private bool checkFiledEmp(string action)
+        {
+            if (!Check.getString(txtEmpID.Text))
+            {
+                MessageBox.Show("Employee ID is empty!", "Error");
+                txtEmpID.Focus();
+                return false;
+            }
+            if (action.Equals("INSERT"))
+            {
+                if (!daoEmp.checkDupEmpID(txtEmpID.Text))
+                {
+                    MessageBox.Show("Employee ID is duplicate!", "Error");
+                    txtEmpID.Focus();
+                    return false;
+                }
+            }
+            if (!Check.getString(txtFullName.Text))
+            {
+                MessageBox.Show("Full Name is empty!", "Error");
+                txtFullName.Focus();
+                return false;
+            }
+            if (!Check.getString(txtUserName.Text))
+            {
+                MessageBox.Show("User Name is empty!", "Error");
+                txtUserName.Focus();
+                return false;
+            }
+            if (action.Equals("INSERT"))
+            {
+                if (!daoEmp.checkDupUserName(txtUserName.Text))
+                {
+                    MessageBox.Show("User Name is duplicate!", "Error");
+                    txtUserName.Focus();
+                    return false;
+                }
+            }
+            if (!Check.getString(txtPassword.Text))
+            {
+                MessageBox.Show("Password is empty!", "Error");
+                txtPassword.Focus();
+                return false;
+            }
+            return true;
+        }
+        private void btnAddNewEmp_Click(object sender, EventArgs e)
+        {
+            bool check = checkFiledEmp("INSERT");
+            if (check)
+            {
+                EmployeeDTO dtoEmp = new EmployeeDTO()
+                {
+                    id = txtEmpID.Text,
+                    fullName = txtFullName.Text,
+                    userName = txtUserName.Text,
+                    password = txtPassword.Text,
+                    role = false,
+                    status = cbActive.Checked
+                };
+                try
+                {
+                    if (daoEmp.addNewEmp(dtoEmp))
+                    {
+                        MessageBox.Show("Successfully add Employee with ID: " + dtoEmp.id, "Message");
+                        loadDataEmp(false);
+                        employeeEmpty();
+                    }
+                    else
+                    {
+                        MessageBox.Show("UnSuccessfully add Employee", "Message");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void txtSearchEmp_TextChanged(object sender, EventArgs e)
+        {
+            employeeEmpty();
+            DataView dv = dtEmp.DefaultView;
+            string filter = "FullName like'%" + txtSearchEmp.Text + "%'";
+            dv.RowFilter = filter;
+        }
+
+        private void btnUpdateEmp_Click(object sender, EventArgs e)
+        {
+            EmployeeDTO emp = null;
+            emp = new EmployeeDTO()
+            {
+                id = txtEmpID.Text,
+                role = false,
+                status = cbActive.Checked
+            };
+            try
+            {
+                if (daoEmp.updateEmployee(emp))
+                {
+                    MessageBox.Show("Successfully update Emp with ID: " + emp.id, "Message");
+                    loadDataEmp(false);
+                    employeeEmpty();
+                }
+                else
+                {
+                    MessageBox.Show("UnSuccessfully update Employee", "Message");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
     }
 }
